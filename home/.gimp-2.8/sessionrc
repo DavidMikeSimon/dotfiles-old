@@ -1,0 +1,74 @@
+# GIMP sessionrc
+# 
+# This file takes session-specific info (that is info, you want to keep
+# between two GIMP sessions).  You are not supposed to edit it manually, but
+# of course you can do.  The sessionrc will be entirely rewritten every time
+# you quit GIMP.  If this file isn't found, defaults are used.
+
+(session-info "toplevel"
+    (factory-entry "gimp-empty-image-window")
+    (position 364 160)
+    (size 1241 847)
+    (open-on-exit))
+(session-info "toplevel"
+    (factory-entry "gimp-single-image-window")
+    (position 160 70)
+    (size 1140 780))
+(session-info "toplevel"
+    (factory-entry "gimp-file-open-dialog")
+    (position 0 0)
+    (size 960 1056))
+(session-info "toplevel"
+    (factory-entry "gimp-file-save-dialog")
+    (position 0 0)
+    (size 960 1056))
+(session-info "toplevel"
+    (factory-entry "gimp-file-export-dialog")
+    (position 0 0)
+    (size 960 1056))
+(session-info "toplevel"
+    (factory-entry "gimp-toolbox-color-dialog")
+    (position 0 90))
+(session-info "toplevel"
+    (factory-entry "gimp-image-new-dialog")
+    (position 2160 46))
+(session-info "toplevel"
+    (factory-entry "gimp-brightness-contrast-tool-dialog")
+    (position 606 121))
+(session-info "toplevel"
+    (factory-entry "gimp-dock-window")
+    (position 1100 19)
+    (size 676 999)
+    (open-on-exit)
+    (aux-info
+        (show-image-menu "false")
+        (follow-active-image "true"))
+    (gimp-dock
+        (book
+            (current-page 0)
+            (dockable "gimp-layer-list"
+                (tab-style automatic)
+                (preview-size 32))
+            (dockable "gimp-channel-list"
+                (tab-style automatic)
+                (preview-size 32))
+            (dockable "gimp-vectors-list"
+                (tab-style automatic)
+                (preview-size 32))
+            (dockable "gimp-undo-history"
+                (tab-style automatic)))
+        (book
+            (position 453)
+            (current-page 0)
+            (dockable "gimp-brush-grid"
+                (tab-style automatic))
+            (dockable "gimp-pattern-grid"
+                (tab-style automatic))
+            (dockable "gimp-gradient-list"
+                (tab-style automatic)))))
+
+(hide-docks no)
+(single-window-mode no)
+(last-tip-shown 0)
+
+# end of sessionrc

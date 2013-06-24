@@ -1,0 +1,14 @@
+# recently closed docks
+
+(GimpSessionInfo "Toolbox - Tool Options"
+    (factory-entry "gimp-toolbox-window")
+    (position 93 111)
+    (size 150 837)
+    (open-on-exit)
+    (gimp-toolbox
+        (book
+            (current-page 0)
+            (dockable "gimp-tool-options"
+                (tab-style automatic)))))
+
+# end of recently closed docks
