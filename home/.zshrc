@@ -75,6 +75,8 @@ bindkey '^H' backward-delete-char
 
 alias s="cd.."
 
+# Allow use of globs that return no results
 setopt nullglob
 
+# Enable rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
