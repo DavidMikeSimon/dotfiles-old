@@ -80,3 +80,5 @@ setopt nullglob
 
 # Enable rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+
+export VISUAL=vim
