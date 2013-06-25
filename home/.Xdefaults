@@ -55,7 +55,7 @@ URxvt.cursorUnderline:      false
 URxvt.pointerBlank:         true
 
 ! Fix terminal name
-! URxvt.termName: rxvt-256color
+URxvt.termName: rxvt-unicode
  
 !!Source http://github.com/altercation/solarized
  
