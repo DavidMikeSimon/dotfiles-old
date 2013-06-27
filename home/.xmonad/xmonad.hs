@@ -113,7 +113,7 @@ prettyPrinter dbus = defaultPP
 myLogHook = do
   takeTopFocus
   setWMName "LG3D"
-  fadeInactiveLogHook 0.9
+  fadeInactiveLogHook 0.85
   -- FIXME Bail out if this wasn't a focus change event
   movePanel 
   -- updatePointer (Relative 0.5 0.5)
