@@ -7,10 +7,6 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="tjkirch"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -74,6 +70,7 @@ bindkey '^?' backward-delete-char
 bindkey '^H' backward-delete-char
 
 alias s="cd.."
+alias megavim="vim +vsplit +vsplit"
 
 # Allow use of globs that return no results
 setopt nullglob
