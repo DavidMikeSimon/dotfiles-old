@@ -1,0 +1,5 @@
+#!/bin/sh
+echo "BACKING UP SAVES..."
+cp -a /home/david/.minecraft/saves "/home/david/.minecraft-backup-`date +%Y%m%d-%H%M%S`"
+echo "STARTING MINECRAFT"
+java -Xmx1024M -Xms512M -cp Downloads/Minecraft.jar net.minecraft.LauncherFrame
