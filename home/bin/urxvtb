@@ -1,0 +1,7 @@
+#!/bin/sh
+c=""
+for color in red green blue; do
+    RANDOM=`dd if=/dev/urandom bs=1 count=10 2>/dev/null | md5sum`
+    c=$c$(echo "obase=10; ibase=16; i=$(echo $RANDOM | md5sum | head -c2 | tr '[:lower:]' '[:upper:]'); (i + 4B)/5" | bc | awk '{printf "%02X", $0}')
+done
+urxvt -bg "#$c" -e /usr/bin/zsh
