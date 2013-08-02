@@ -1,0 +1,14 @@
+OPTIONS=windowtype:Qt,toptenwin,hilite_pet,tiled_map,!ascii_map
+OPTIONS=fixinv,safe_pet,sortpack,tombstone,color,number_pad,paranoid_hit,time
+OPTIONS=verbose,news,fruit:potato
+OPTIONS=runmode:c
+OPTIONS=name:Rios
+OPTIONS=dogname:Ed
+OPTIONS=catname:Bob
+OPTIONS=pickup_types:$
+OPTIONS=nomail
+OPTIONS=menustyle:partial,!time,showexp
+OPTIONS=msghistory:200
+OT_TILEWIDTH=16
+QT_TILEHEIGHT=20
+QT_FONTSIZE=s
