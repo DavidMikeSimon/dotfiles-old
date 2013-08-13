@@ -25,7 +25,7 @@ import Data.List as L
 import qualified Control.Concurrent
 import qualified Data.Text as T
 import qualified DBus
-import qualified DBus.Client.Simple as D
+import qualified DBus.Client as D
 import qualified Codec.Binary.UTF8.String as UTF8
 import Data.Monoid
 
@@ -140,16 +140,20 @@ main = do
 
 getWellKnownName :: D.Client -> IO ()
 getWellKnownName dbus = do
-  D.requestName dbus (D.busName_ (T.pack "org.xmonad.Log"))
-                [D.AllowReplacement, D.ReplaceExisting, D.DoNotQueue]
+  D.requestName dbus (DBus.busName_ "org.xmonad.Log")
+                [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
   return ()
 
 dbusOutput :: D.Client -> String -> IO ()
-dbusOutput dbus str = D.emit dbus
-                       (D.objectPath_ $ T.pack "/org/xmonad/Log")
-                       (D.interfaceName_ $ T.pack "org.xmonad.Log")
-                       (D.memberName_ $ T.pack "Update")
-                       [D.toVariant ("<b>" ++ (UTF8.decodeString str) ++ "</b>")]
+dbusOutput dbus str = D.emit dbus signal
+  where
+    signal = ( DBus.signal 
+      (DBus.objectPath_ "/org/xmonad/Log")
+      (DBus.interfaceName_ "org.xmonad.Log")
+      (DBus.memberName_ "Update")
+      ) {DBus.signalBody = body}
+    body = [DBus.toVariant ("<b>" ++ (UTF8.decodeString str) ++ "</b>")]
+      
 
 pangoColor :: String -> String -> String
 pangoColor fg = wrap left right
