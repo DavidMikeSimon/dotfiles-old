@@ -11,7 +11,7 @@ ZSH_THEME="tjkirch"
 # CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how often before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
@@ -36,7 +36,8 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(bower command-not-found cp git git-extras npm pip symfony2)
+# plugins=(bower command-not-found cp git git-extras npm pip symfony2)
+plugins=(command-not-found cp)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -76,7 +77,7 @@ setopt nullglob
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 
 # Utility scripts shared by homesick
-export PATH=$PATH:~/bin-utils
+export PATH=$PATH:~/bin-utils:$PATH:~/bin
 
 # I hate nano!
 export VISUAL=vim
