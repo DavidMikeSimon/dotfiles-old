@@ -89,3 +89,6 @@ alias ifmud="tt++ ~/.ifmud.ttcfg"
 alias smplayer="mplayer -framedrop -subfont-autoscale 1 -sid 0 -fs -af volume=10,pan=1:0.5:0.5"
 alias minecraft="java -Xmx1024M -Xms512M -cp Downloads/Minecraft.jar net.minecraft.LauncherFrame"
 alias cdhs="cd `homesick show_path`"
+
+# Disable the XOFF/XON freeze when you hit Ctrl+S
+stty -ixon
