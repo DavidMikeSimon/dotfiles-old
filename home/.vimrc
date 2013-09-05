@@ -53,7 +53,7 @@ fun! SetupVAM()
     \ 'vim-twig',
     \ 'vim-less',
     \ 'vim-coffee-script',
-    \ 'DetectIndent',
+    \ 'editorconfig-vim',
     \ 'a',
     \ 'github:scrooloose/nerdcommenter',
     \ 'github:ervandew/supertab',
@@ -92,7 +92,6 @@ syntax on
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 au BufReadPost * set formatoptions=croq
-au BufReadPost * :DetectIndent
 
 au BufReadPost *.md,*.markdown set spell
 
@@ -108,10 +107,8 @@ set mouse=a      " Enable mouse usage (all modes)
 set ruler
 set autoindent
 
-" Indentation is 4 spaces by default
-set ts=4 sts=4 sw=4 expandtab
-let g:detectindent_preferred_expandtab = 1
-let g:detectindent_preferred_indent = 4
+" Indentation is 2 spaces by default
+set ts=2 sts=2 sw=2 expandtab
 
 " Don't treat 0-padded numbers as octal when doing numeric stuff
 set nrformats-=octal
