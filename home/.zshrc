@@ -37,7 +37,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # plugins=(bower command-not-found cp git git-extras npm pip symfony2)
-plugins=(command-not-found cp)
+plugins=(command-not-found cp vi-mode history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -59,7 +59,6 @@ zle-line-init () {
     fi
 }
 zle -N zle-line-init
-bindkey -v
 
 # Additional vi mode bindings, from http://zshwiki.org/home/zle/vi-mode
 bindkey -a 'gg' beginning-of-buffer-or-history
