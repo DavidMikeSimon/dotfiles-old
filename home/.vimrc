@@ -62,7 +62,9 @@ fun! SetupVAM()
     \ 'ctrlp',
     \ 'BufOnly',
     \ 'keepcase',
-    \ 'Tabular'
+    \ 'Tabular',
+    \ 'ingo-library',
+    \ 'ProportionalResize'
   \ ], {'auto_install' : 0})
   " sample: call vam#ActivateAddons(['pluginA','pluginB', ...], {'auto_install' : 0})
 
