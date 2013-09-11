@@ -298,7 +298,6 @@
 ; (gtk_accel_path "<Actions>/plug-in/script-fu-alien-glow-button" "")
 ; (gtk_accel_path "<Actions>/plug-in/plug-in-script-fu-server" "")
 ; (gtk_accel_path "<Actions>/dockable/dialogs-cursor" "")
-; (gtk_accel_path "<Actions>/windows/windows-recent-0001" "")
 ; (gtk_accel_path "<Actions>/plug-in/plug-in-fractal-trace" "")
 ; (gtk_accel_path "<Actions>/windows/windows-hide-docks" "Tab")
 ; (gtk_accel_path "<Actions>/plug-in/gimp-palette-export-java" "")

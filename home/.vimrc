@@ -53,7 +53,7 @@ fun! SetupVAM()
     \ 'vim-twig',
     \ 'vim-less',
     \ 'vim-coffee-script',
-    \ 'DetectIndent',
+    \ 'editorconfig-vim',
     \ 'a',
     \ 'github:scrooloose/nerdcommenter',
     \ 'github:ervandew/supertab',
@@ -62,7 +62,9 @@ fun! SetupVAM()
     \ 'ctrlp',
     \ 'BufOnly',
     \ 'keepcase',
-    \ 'Tabular'
+    \ 'Tabular',
+    \ 'ingo-library',
+    \ 'ProportionalResize'
   \ ], {'auto_install' : 0})
   " sample: call vam#ActivateAddons(['pluginA','pluginB', ...], {'auto_install' : 0})
 
@@ -92,25 +94,23 @@ syntax on
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 au BufReadPost * set formatoptions=croq
-au BufReadPost * :DetectIndent
 
 au BufReadPost *.md,*.markdown set spell
 
-set showcmd		" Show (partial) command in status line.
-set showmatch		" Show matching brackets.
-set ignorecase		" Do case insensitive matching
-set smartcase		" Do smart case matching
-set incsearch		" Incremental search
-set autowrite		" Automatically save before commands like :next and :make
-set hidden             " Hide buffers when they are abandoned
-set mouse=a		" Enable mouse usage (all modes)
+set showcmd      " Show (partial) command in status line.
+set showmatch    " Show matching brackets.
+set showcmd      " Show counts of matching lines
+set ignorecase   " Do case insensitive matching
+set smartcase    " Do smart case matching
+set incsearch    " Incremental search
+set autowrite    " Automatically save before commands like :next and :make
+set hidden       " Hide buffers when they are abandoned
+set mouse=a      " Enable mouse usage (all modes)
 set ruler
 set autoindent
 
-" Indentation is 4 spaces by default
-set ts=4 sts=4 sw=4 expandtab
-let g:detectindent_preferred_expandtab = 1
-let g:detectindent_preferred_indent = 4
+" Indentation is 2 spaces by default
+set ts=2 sts=2 sw=2 expandtab
 
 " Don't treat 0-padded numbers as octal when doing numeric stuff
 set nrformats-=octal
@@ -196,3 +196,7 @@ map <leader>pp :r!xsel<CR>
 set backspace=2
 
 let mapleader=","
+
+au WinLeave * set nocursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+set cursorline cursorcolumn
