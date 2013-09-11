@@ -7,7 +7,7 @@
 
 (session-info "toplevel"
     (factory-entry "gimp-empty-image-window")
-    (position 364 160)
+    (position 27 57)
     (size 1241 847)
     (open-on-exit))
 (session-info "toplevel"
@@ -17,7 +17,7 @@
 (session-info "toplevel"
     (factory-entry "gimp-file-open-dialog")
     (position 0 0)
-    (size 960 1056))
+    (size 840 630))
 (session-info "toplevel"
     (factory-entry "gimp-file-save-dialog")
     (position 0 0)
@@ -25,7 +25,7 @@
 (session-info "toplevel"
     (factory-entry "gimp-file-export-dialog")
     (position 0 0)
-    (size 960 1056))
+    (size 840 630))
 (session-info "toplevel"
     (factory-entry "gimp-toolbox-color-dialog")
     (position 0 90))
@@ -37,7 +37,7 @@
     (position 606 121))
 (session-info "toplevel"
     (factory-entry "gimp-dock-window")
-    (position 1100 19)
+    (position 690 237)
     (size 676 999)
     (open-on-exit)
     (aux-info
