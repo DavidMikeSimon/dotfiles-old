@@ -81,6 +81,8 @@ export PATH=$PATH:~/bin-utils:$PATH:~/bin
 # I hate nano!
 export VISUAL=vim
 
+export TODOTXT_DEFAULT_ACTION=ls
+
 # Common commands
 alias s="cd.."
 alias megavim="vim +vsplit +vsplit"
@@ -88,6 +90,7 @@ alias ifmud="tt++ ~/.ifmud.ttcfg"
 alias smplayer="mplayer -framedrop -subfont-autoscale 1 -sid 0 -fs -af volume=10,pan=1:0.5:0.5"
 alias minecraft="java -Xmx1024M -Xms512M -cp Downloads/Minecraft.jar net.minecraft.LauncherFrame"
 alias cdhs="cd `homesick show_path`"
+alias t="bash /home/dave/bin-utils/todo.txt_cli/todo.sh"
 
 # Disable the XOFF/XON freeze when you hit Ctrl+S
 stty -ixon
