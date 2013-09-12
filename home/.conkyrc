@@ -1,0 +1,22 @@
+alignment top_right
+border_width 0
+default_color 073642
+default_outline_color white
+default_shade_color white
+double_buffer yes
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+gap_x 17
+gap_y 40
+override_utf8_locale
+own_window yes
+own_window_colour eee8d5
+own_window_type override
+text_buffer_size 65536
+use_xft yes
+xftfont UbuntuMono:size=10
+
+TEXT
+${execp bash ~/bin-utils/todo.txt_cli/todo.sh -d ~/bin-utils/todo.txt_cli/todo-conky.cfg ls}
