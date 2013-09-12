@@ -1,6 +1,7 @@
 alignment top_right
 border_width 0
-default_color 073642
+color1 073642
+default_color 586e75
 default_outline_color white
 default_shade_color white
 double_buffer yes
@@ -19,4 +20,27 @@ use_xft yes
 xftfont UbuntuMono:size=10
 
 TEXT
-${execp bash ~/bin-utils/todo.txt_cli/todo.sh -d ~/bin-utils/todo.txt_cli/todo-conky.cfg ls}
+$nodename - $sysname $kernel on $machine
+$stippled_hr
+${color1}Uptime:$color $uptime ${color blue}- Load:$color $loadavg
+${color1}CPU Usage:${color #5000a0} ${cpu}% ${cpubar}
+${color black}${cpugraph 000000 5000a0}
+${color1}RAM Usage:$color $mem/$memmax - $memperc% $membar
+${color1}Swap Usage:$color $swap/$swapmax - $swapperc% ${swapbar}
+${color1}Processes:$color $processes  ${color blue}Running:$color $running_processes
+$color$stippled_hr
+${color1}Networking:
+ Down:${color #8844ee} ${downspeed eth0} k/s${color1} ${offset 140}Up:${color #22aadd} ${upspeed eth0} k/s
+${color black}${downspeedgraph eth0 32,200 ff0000 0000ff} $alignr${color black}${upspeedgraph eth0 32,200 0000ff ff0000}
+${color1}File systems:
+ / $color${fs_used /}/${fs_size /} ${fs_bar /}
+${color}Name              PID     CPU%   MEM%
+${color #ddaa00} ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
+${color1} ${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
+${color1} ${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
+${color}Mem usage
+${color #ddaa00} ${top_mem name 1} ${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}
+${color1} ${top_mem name 2} ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
+${color1} ${top_mem name 3} ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
+$stippled_hr
+${execp bash ~/bin-utils/todo.txt_cli/todo.sh -d ~/bin-utils/todo.txt_cli/todo-conky.cfg ls @work | head -n 10}
