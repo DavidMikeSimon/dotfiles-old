@@ -64,7 +64,8 @@ fun! SetupVAM()
     \ 'keepcase',
     \ 'Tabular',
     \ 'ingo-library',
-    \ 'ProportionalResize'
+    \ 'ProportionalResize',
+    \ 'jinja'
   \ ], {'auto_install' : 0})
   " sample: call vam#ActivateAddons(['pluginA','pluginB', ...], {'auto_install' : 0})
 
@@ -200,3 +201,5 @@ let mapleader=","
 au WinLeave * set nocursorline nocursorcolumn
 au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
+
+autocmd BufNewFile,BufRead *.j2 set ft=jinja
