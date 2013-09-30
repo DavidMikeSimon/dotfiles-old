@@ -67,6 +67,7 @@ myKeys =
         [
           ((mod4Mask, xK_f), windows $ withOtherWorkspace W.greedyView)
         , ((mod4Mask, xK_p), shellPromptHere defaultXPConfig)
+        , ((mod4Mask, xK_g), spawn "x-www-browser")
         ]
         ++
         [((m .|. mod4Mask, k), windows $ f i)
