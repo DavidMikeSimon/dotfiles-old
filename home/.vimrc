@@ -203,3 +203,7 @@ au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
 
 autocmd BufNewFile,BufRead *.j2 set ft=jinja
+
+silent !mkdir -p $HOME/.vim/undo > /dev/null 2>&1
+set undodir=$HOME/.vim/undo
+set undofile
