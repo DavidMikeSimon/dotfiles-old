@@ -2,6 +2,7 @@
 
 import XMonad
 import qualified XMonad.Operations as Ops
+import XMonad.Actions.CycleWS
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.SpawnOn
 import XMonad.Prompt
@@ -65,7 +66,10 @@ withOtherWorkspace f ws = f (otherWorkspace ws) ws
 
 myKeys =
         [
-          ((mod4Mask, xK_f), windows $ withOtherWorkspace W.greedyView)
+          ((mod4Mask, xK_f), do
+            nextScreen
+            windows $ withOtherWorkspace W.greedyView
+          )
         , ((mod4Mask, xK_p), shellPromptHere defaultXPConfig)
         , ((mod4Mask, xK_g), spawn "x-www-browser")
         ]
