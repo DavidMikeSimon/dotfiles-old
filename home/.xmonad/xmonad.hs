@@ -15,6 +15,7 @@ import XMonad.Hooks.ICCCMFocus
 import XMonad.Hooks.FadeInactive
 import XMonad.Util.EZConfig(additionalKeys, removeKeys)
 import XMonad.Util.Run
+import XMonad.Util.WorkspaceCompare
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 import XMonad.Hooks.SetWMName
@@ -113,6 +114,7 @@ prettyPrinter dbus = defaultPP
     , ppUrgent   = pangoColor "red"
     , ppLayout   = pangoColor "white" . wrap "(" ")" . (:[]) . head
     , ppSep      = " "
+    , ppSort     = getSortByXineramaRule
     }
 
 myLogHook = do
