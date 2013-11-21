@@ -1,13 +1,43 @@
 [user]
-	name = David Simon
-  email = dsimon@americancouncils.org
+  name = David Simon
+  email = david.mike.simon@gmail.com
 
-[core]
-	excludesfile = ~/.gitexcludes
+[advice]
+  statusHints = false
+
+[alias]
+  switch = !legit switch \"$@\"
+  branches = !legit branches
+  sprout = !legit sprout \"$@\"
+  unpublish = !legit unpublish \"$@\"
+  harvest = !legit harvest \"$@\"
+  sync = !legit sync \"$@\"
+  publish = !legit publish \"$@\"
+  graft = !legit graft \"$@\"
+
+[apply]
+  whitespace = error
 
 [color]
-  diff = true
+  ui = auto
+
+[core]
+  excludesfile = ~/.gitexcludes
+
+[diff]
+  renames = copies
+  mnemonicprefix = true
+
+[format]
+  pretty = format:"%C(magenta)%h%Creset %ad %C(bold)%an%n%Creset    %s%n"
+
+[log]
+  abbrevCommit = true
+  date = short
+
+[rerere]
+  enabled = true
 
 [remote "origin"]
   push = refs/heads/*:refs/heads/*
-	push = +refs/tags/*:refs/tags/*
+  push = +refs/tags/*:refs/tags/*

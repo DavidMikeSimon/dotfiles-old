@@ -94,3 +94,6 @@ alias t="bash /home/dave/bin-utils/todo.txt_cli/todo.sh"
 
 # Disable the XOFF/XON freeze when you hit Ctrl+S
 stty -ixon
+
+# added by travis gem
+[ -f /home/dave/.travis/travis.sh ] && source /home/dave/.travis/travis.sh
