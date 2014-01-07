@@ -1,3 +1,0 @@
-[submodule "home/.janus/editorconfig"]
-	path = home/.janus/editorconfig
-	url = https://github.com/editorconfig/editorconfig-vim.git

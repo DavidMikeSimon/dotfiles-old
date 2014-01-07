@@ -1,3 +1,8 @@
+execute pathogen#infect()
+
+" Set the leader to comma, more convenient in Dvorak keyboard
+let mapleader=","
+
 set nocompatible | filetype plugin on | syn on
 
 set showcmd      " Show (partial) command in status line.
@@ -10,6 +15,8 @@ set hidden       " Hide buffers when they are abandoned
 set mouse=a      " Enable mouse usage (all modes)
 set ruler        " Always show current position
 set autoindent   " Automatically copy indent to new lines
+set hlsearch     " Highlight search results
+set shiftround   " Don't allow uneven indentation
 
 " Comment settings:
 " c - auto-wrap comments
@@ -22,9 +29,6 @@ au BufReadPost *.md set wrap linebreak nolist textwidth=0 wrapmargin=0 cc=0
 
 " FIXME Temporary hack to deal with weird issues in PHP comments
 au BufReadPost *.php set comments=sO:*\ -,mO:*\ \ ,ex0:*/,s1:/*,mb:*,ex:*/1
-
-" Default indentation is 2 spaces
-set ts=2 sts=2 sw=2 expandtab
 
 " When doing numeric operations, don't tread 0-padded numbers as octal
 set nrformats-=octal
@@ -101,9 +105,18 @@ let g:ctrlp_root_markers = [
   \ 'composer.phar',
   \ 'package.json',
   \ 'components.json',
-  \ 'Rakefile'
+  \ 'Rakefile',
+  \ 'CMakeLists.txt'
   \ ]
 
-" Plugin settings: a
-let g:alternateNoDefaultAlternate = 1
-let g:alternateRelativeFiles = 1
+" Default indentation is 2 spaces
+set ts=2 sts=2 sw=2 expandtab
+
+" Plugin settings: DetectIndent
+:au BufReadPost * :DetectIndent
+
+" Clear incsearch highlighting with <C-L>
+nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+
+" Plugin settings: Gundo
+nnoremap <leader>g :GundoToggle<CR>
