@@ -15,7 +15,7 @@ set hidden       " Hide buffers when they are abandoned
 set mouse=a      " Enable mouse usage (all modes)
 set ruler        " Always show current position
 set autoindent   " Automatically copy indent to new lines
-"set hlsearch     " Highlight search results
+set hlsearch     " Highlight search results
 set shiftround   " Don't allow uneven indentation
 
 " Comment settings:
@@ -111,6 +111,12 @@ let g:ctrlp_root_markers = [
 
 " Default indentation is 2 spaces
 set ts=2 sts=2 sw=2 expandtab
+
+" Plugin settings: DetectIndent
+:au BufReadPost * :DetectIndent
+
+" Clear incsearch highlighting with <C-L>
+nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 
 " Plugin settings: Gundo
 nnoremap <leader>g :GundoToggle<CR>
