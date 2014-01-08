@@ -113,10 +113,10 @@ let g:ctrlp_root_markers = [
 set ts=2 sts=2 sw=2 expandtab
 
 " Plugin settings: DetectIndent
-:au BufReadPost * :DetectIndent
+:au BufReadPost * DetectIndent
 
-" Clear incsearch highlighting with <C-L>
-nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+" Clear incsearch highlighting with <C-S>
+nnoremap <silent> <C-S> :nohlsearch<CR>
 
 " Plugin settings: Gundo
 nnoremap <leader>g :GundoToggle<CR>
