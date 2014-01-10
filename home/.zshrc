@@ -84,7 +84,7 @@ export VISUAL=vim
 export TODOTXT_DEFAULT_ACTION=ls
 
 # Common commands
-alias s="cd.."
+alias u="cd.."
 alias megavim="vim +vsplit +vsplit"
 alias ifmud="tt++ ~/.ifmud.ttcfg"
 alias smplayer="mplayer -framedrop -subfont-autoscale 1 -sid 0 -fs -af volume=10,pan=1:0.5:0.5"
