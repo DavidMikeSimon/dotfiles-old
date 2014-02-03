@@ -91,6 +91,7 @@ alias smplayer="mplayer -framedrop -subfont-autoscale 1 -sid 0 -fs -af volume=10
 alias minecraft="java -Xmx1024M -Xms512M -cp Downloads/Minecraft.jar net.minecraft.LauncherFrame"
 alias cdhs="cd `homesick show_path`"
 alias t="bash /home/dave/bin-utils/todo.txt_cli/todo.sh"
+alias g=git
 
 # Disable the XOFF/XON freeze when you hit Ctrl+S
 stty -ixon

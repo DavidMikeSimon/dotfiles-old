@@ -8,10 +8,12 @@
     (debug-events no)
     (controller "GimpControllerWheel")
     (mapping
+        (map "scroll-down" "view-zoom-out")
         (map "scroll-down-shift-control-alt" "context-font-select-previous")
         (map "scroll-up-shift-control-alt" "context-font-select-next")
         (map "scroll-down-alt" "tools-value-1-decrease-skip")
         (map "scroll-up-control-alt" "context-gradient-select-next")
+        (map "scroll-up" "view-zoom-in")
         (map "scroll-down-shift-control" "context-brush-select-previous")
         (map "scroll-up-alt" "tools-value-1-increase-skip")
         (map "scroll-up-shift-alt" "context-pattern-select-next")

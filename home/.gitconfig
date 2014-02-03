@@ -15,9 +15,6 @@
   publish = !legit publish \"$@\"
   graft = !legit graft \"$@\"
 
-[apply]
-  whitespace = error
-
 [color]
   ui = auto
 
