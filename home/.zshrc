@@ -78,6 +78,9 @@ setopt nullglob
 # Utility scripts shared by homesick
 export PATH=$PATH:~/bin-utils:$PATH:~/bin
 
+# Composer-installed executables
+export PATH=$PATH:~/.composer/vendor/bin
+
 # I hate nano!
 export VISUAL=vim
 
