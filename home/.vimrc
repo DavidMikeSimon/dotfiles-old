@@ -119,4 +119,4 @@ set ts=2 sts=2 sw=2 expandtab
 nnoremap <silent> <C-S> :nohlsearch<CR>
 
 " Plugin settings: Gundo
-nnoremap <leader>g :GundoToggle<CR>
+nnoremap <leader>u :GundoToggle<CR>
