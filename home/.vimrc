@@ -120,3 +120,17 @@ nnoremap <silent> <C-S> :nohlsearch<CR>
 
 " Plugin settings: Gundo
 nnoremap <leader>u :GundoToggle<CR>
+
+" Save file position on exit
+set viminfo='10,\"100,:20,%,n~/.viminfo
+function! ResCur()
+  if line("'\"") <= line("$")
+    normal! g`"
+    normal! zz
+    return 1
+  endif
+endfunction
+augroup resCur
+  autocmd!
+  autocmd BufWinEnter * call ResCur()
+augroup END
