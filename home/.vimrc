@@ -112,14 +112,31 @@ let g:ctrlp_root_markers = [
 " Default indentation is 2 spaces
 set ts=2 sts=2 sw=2 expandtab
 
+" Keep some space above/below cursor
+set scrolloff=10
+
 " Plugin settings: DetectIndent
 :au BufReadPost * DetectIndent
+
+" Plugin settings: Supertab
+let g:SuperTabLongestEnhanced=1
+let g:SuperTabCrMapping=0
 
 " Clear incsearch highlighting with <C-S>
 nnoremap <silent> <C-S> :nohlsearch<CR>
 
 " Plugin settings: Gundo
 nnoremap <leader>u :GundoToggle<CR>
+
+" Plugin settings: YankRing
+nnoremap <leader>P :YRShow<CR>
+
+" Center screen with space bar
+nmap <space> zz
+
+" Very magic regex mode by default
+nnoremap / /\v
+cnoremap s/ s/\v
 
 " Save file position on exit
 set viminfo='10,\"100,:20,%,n~/.viminfo

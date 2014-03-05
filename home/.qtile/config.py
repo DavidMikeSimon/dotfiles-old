@@ -14,8 +14,6 @@ class Commands(object):
     volume_up = 'amixer -q -c 0 sset Master 5dB+'
     volume_down = 'amixer -q -c 0 sset Master 5dB-'
     volume_toggle = 'amixer -q -c 0 sset Master toggle'
-    logout = 'gnome-session-quit --logout --no-prompt'
-    shutdown = 'gnome-session-quit --power-off'
 
 
 ##-> Theme + widget options
@@ -85,13 +83,12 @@ MOD = 'mod4'
 keys = [
     Key([MOD, 'control'], 'r', lazy.restart()),
     Key([MOD, 'control'], 'q', lazy.shutdown()),
-    #Key([MOD, 'control'], 'q', lazy.spawn(Commands.logout)),
 
     Key([MOD], 'w', lazy.window.kill()),
 
-    #Key([], 'XF86AudioRaiseVolume', lazy.spawn(Commands.volume_up)),
-    #Key([], 'XF86AudioLowerVolume', lazy.spawn(Commands.volume_down)),
-    #Key([], 'XF86AudioMute', lazy.spawn(Commands.volume_toggle)),
+    Key([], 'XF86AudioRaiseVolume', lazy.spawn(Commands.volume_up)),
+    Key([], 'XF86AudioLowerVolume', lazy.spawn(Commands.volume_down)),
+    Key([], 'XF86AudioMute', lazy.spawn(Commands.volume_toggle)),
 
     Key([MOD], 'r', lazy.spawncmd(prompt=":")),
     Key([MOD], 'g', lazy.spawn('x-www-browser')),
@@ -101,22 +98,9 @@ keys = [
     Key([MOD, 'shift'], 'Tab', lazy.layout.previous()),
     Key([MOD], 'apostrophe', lazy.to_screen(0)),
     Key([MOD], 'period', lazy.to_screen(1)),
-    #Key([MOD, 'shift'], 'j', lazy.layout.shuffle_up()),
-    #Key([MOD, 'shift'], 'k', lazy.layout.shuffle_down()),
-    #Key([MOD, 'shift'], 'g', lazy.layout.grow()),
-    #Key([MOD, 'shift'], 's', lazy.layout.shrink()),
-    #Key([MOD, 'shift'], 'n', lazy.layout.normalize()),
-    #Key([MOD, 'shift'], 'm', lazy.layout.maximize()),
-    #Key([MOD, 'shift'], 'space', lazy.layout.flip()),
-
-    #Key([MOD], 'space', lazy.layout.next()),
-    #Key([MOD], 'Tab', lazy.nextlayout()),
-
-    #Key([MOD, 'shift'], 'space', lazy.layout.rotate()),
-    #Key([MOD, 'shift'], 'Return', lazy.layout.toggle_split()),
-
-    #Key([MOD], '\'', lazy.to_screen(1)), # left
-    #Key([MOD], '.', lazy.to_screen(0)), # right
+    Key([MOD], 'h', lazy.layout.decrease_ratio()),
+    Key([MOD], 'l', lazy.layout.increase_ratio()),
+    Key([MOD], 'space', lazy.layout.up()),
 
     ## TODO: What does the printscreen button map to?
     Key([MOD], 'p', lazy.spawn(Commands.screenshot)),
@@ -127,7 +111,6 @@ keys = [
     Key([], 'XF86TouchpadToggle', lazy.spawn(Commands.trackpad_toggle)),
 
     Key([MOD, 'control'], 'l', lazy.spawn(Commands.lock_screen)),
-    #Key([MOD, 'control'], 's', lazy.spawn('/usr/bin/gksudo /etc/acpi/sleep.sh')),
 ]
 
 
@@ -142,6 +125,11 @@ group_setup = (
     ('7', {}),
     ('8', {}),
     ('9', {}),
+)
+
+layouts = (
+  layout.Tile(),
+  layout.Max()
 )
 
 groups = []
@@ -191,12 +179,6 @@ screens = [
 ]
 
 
-##-> Layouts
-layouts = (
-    layout.Tile(ratio=0.5),
-    layout.Max(),
-    )
-
 ##-> Floating windows
 floating_layout = layout.floating.Floating(float_rules=[{'wmclass': x} for x in (
     #'audacious',
@@ -232,12 +214,12 @@ def startup_apps():
     subprocess.Popen(["dropbox", "start"])
     subprocess.Popen(["xmodmap", "/home/dave/.xmodmap"])
 
-###-> Run after Qtile init
-#def main(qtile):
-    #from grouper import AppGrouper, Match
+##-> run after qtile init
+def main(qtile):
+    from grouper import AppGrouper, Match
 
-    ### Send apps to specified groups on window creation
-    #AppGrouper(qtile, [{
-        #'group': name,
-        #'match': Match(**config['apps']),
-        #} for name, config in group_setup if 'apps' in config])
+    ## send apps to specified groups on window creation
+    AppGrouper(qtile, [{
+        'group': name,
+        'match': Match(**config['apps']),
+        } for name, config in group_setup if 'apps' in config])
