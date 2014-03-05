@@ -1,7 +1,7 @@
 import gobject
 
 import libqtile.hook
-from libqtile.manager import Key
+from libqtile.config import Key
 from libqtile.command import lazy
 
 

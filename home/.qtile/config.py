@@ -3,8 +3,7 @@
 
 from libqtile import bar, hook, layout, widget
 from libqtile.command import lazy
-from libqtile.manager import Drag, Click, Group, Key, Screen
-from libqtile.widget import crashme
+from libqtile.config import Drag, Click, Group, Key, Screen
 
 ##-> Commands to spawn
 class Commands(object):
@@ -169,8 +168,6 @@ screens = [
             widget.Prompt(),
             widget.WindowName(**Theme.widget),
 
-            #crashme._CrashMe(),
-
             widget.CPUGraph(graph_color='18BAEB', fill_color='1667EB.3', **Theme.graph),
             widget.MemoryGraph(graph_color='00FE81', fill_color='00B25B.3', **Theme.graph),
 
@@ -230,16 +227,17 @@ def startup_apps():
     subprocess.Popen(["nvidia-settings", "-l"])
     #subprocess.Popen(["xcompmgr"])
     subprocess.Popen(["nitrogen", "--restore"])
+    subprocess.call(["killall", "parcellite"])
     subprocess.Popen(["parcellite"])
     subprocess.Popen(["dropbox", "start"])
     subprocess.Popen(["xmodmap", "/home/dave/.xmodmap"])
 
-##-> Run after Qtile init
-def main(qtile):
-    from grouper import AppGrouper, Match
+###-> Run after Qtile init
+#def main(qtile):
+    #from grouper import AppGrouper, Match
 
-    ## Send apps to specified groups on window creation
-    AppGrouper(qtile, [{
-        'group': name,
-        'match': Match(**config['apps']),
-        } for name, config in group_setup if 'apps' in config])
+    ### Send apps to specified groups on window creation
+    #AppGrouper(qtile, [{
+        #'group': name,
+        #'match': Match(**config['apps']),
+        #} for name, config in group_setup if 'apps' in config])
