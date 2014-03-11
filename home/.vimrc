@@ -116,7 +116,7 @@ set ts=2 sts=2 sw=2 expandtab
 set scrolloff=10
 
 " Plugin settings: DetectIndent
-:au BufReadPost * DetectIndent
+au BufReadPost * DetectIndent
 
 " Plugin settings: Supertab
 let g:SuperTabLongestEnhanced=1
@@ -135,8 +135,8 @@ nnoremap <leader>P :YRShow<CR>
 nmap <space> zz
 
 " Very magic regex mode by default
-nnoremap / /\v
-cnoremap s/ s/\v
+" nnoremap / /\v
+" cnoremap s/ s/\v
 
 " Save file position on exit
 set viminfo='10,\"100,:20,%,n~/.viminfo
