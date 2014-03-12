@@ -5,6 +5,7 @@
 wmname LG3D
 nvidia-settings -l
 parcellite &
+volti &
 xcompmgr &
 nitrogen --restore &
 dropbox start &
