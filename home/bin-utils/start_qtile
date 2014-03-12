@@ -7,6 +7,7 @@ nvidia-settings -l
 parcellite &
 volti &
 xcompmgr &
+nm-applet &
 nitrogen --restore &
 dropbox start &
 xmodmap ~/.xmodmap &
