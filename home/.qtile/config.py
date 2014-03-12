@@ -155,19 +155,24 @@ screens = [
       widget.GroupBox(**Theme.groupbox),
       widget.WindowName(**Theme.widget),
 
-      widget.CPUGraph(graph_color='18BAEB', fill_color='1667EB.3', **Theme.graph),
-      widget.MemoryGraph(graph_color='00FE81', fill_color='00B25B.3', **Theme.graph),
-      widget.HDDGraph(graph_color='FE7081', fill_color='B2705B.3', **Theme.graph),
+      #widget.CPUGraph(graph_color='18BAEB', fill_color='1667EB.3', **Theme.graph),
+      #widget.MemoryGraph(graph_color='00FE81', fill_color='00B25B.3', **Theme.graph),
+      #widget.HDDGraph(graph_color='FE7081', fill_color='B2705B.3', **Theme.graph),
 
       #widget.CurrentLayout(**Theme.widget),
       widget.Systray(**Theme.systray),
-      widget.BatteryIcon(**Theme.battery),
-      widget.Battery(**Theme.battery_text),
-      widget.Volume(theme_path='/usr/share/icons/Humanity-Dark/status/24/', **Theme.widget),
+      #widget.BatteryIcon(**Theme.battery),
+      #widget.Battery(**Theme.battery_text),
       widget.Clock(fmt='%a %d %b %I:%M %p', **Theme.widget),
       ], **Theme.bar),
   ),
-  Screen()
+  Screen(
+    top=bar.Bar(widgets=[
+      widget.GroupBox(**Theme.groupbox),
+      widget.WindowName(**Theme.widget),
+      widget.Clock(fmt='%a %d %b %I:%M %p', **Theme.widget)
+      ], **Theme.bar),
+  )
 ]
 
 
