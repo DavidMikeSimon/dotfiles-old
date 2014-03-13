@@ -130,6 +130,7 @@ nnoremap <leader>u :GundoToggle<CR>
 
 " Plugin settings: YankRing
 nnoremap <leader>P :YRShow<CR>
+let g:yankring_history_dir = "$HOME/.vim"
 
 " Center screen with space bar
 nmap <space> zz
