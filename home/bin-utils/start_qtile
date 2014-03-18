@@ -5,7 +5,7 @@
 wmname LG3D
 nvidia-settings -l
 parcellite &
-volti &
+gnome-sound-applet &
 xcompmgr &
 nm-applet &
 nitrogen --restore &
