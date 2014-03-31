@@ -62,8 +62,8 @@ map k gk
 set wrapscan
 
 " Shortcuts to work with the X clipboard
-map <leader>pc :w !xsel -i<CR>
-map <leader>pp :r!xsel<CR>
+map <leader>xc :w !xsel -i<CR>
+map <leader>xp :r!xsel<CR>
 
 " Let backspace key in Insert mode delete anything
 set backspace=indent,eol,start
@@ -127,10 +127,6 @@ nnoremap <silent> <C-S> :nohlsearch<CR>
 
 " Plugin settings: Gundo
 nnoremap <leader>u :GundoToggle<CR>
-
-" Plugin settings: YankRing
-nnoremap <leader>P :YRShow<CR>
-let g:yankring_history_dir = "$HOME/.vim"
 
 " Center screen with space bar
 nmap <space> zz
