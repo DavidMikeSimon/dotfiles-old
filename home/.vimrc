@@ -131,6 +131,11 @@ nnoremap <leader>u :GundoToggle<CR>
 " Center screen with space bar
 nmap <space> zz
 
+" Plugin settings: Easymotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+nmap s <Plug>(easymotion-s)
+let g:EasyMotion_smartcase = 1
+
 " Very magic regex mode by default
 " nnoremap / /\v
 " cnoremap s/ s/\v
