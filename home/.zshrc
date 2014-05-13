@@ -70,7 +70,7 @@ bindkey '^?' backward-delete-char
 bindkey '^H' backward-delete-char
 
 # Allow use of globs that return no results
-setopt nullglob
+#setopt nullglob
 
 # Enable rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
@@ -101,3 +101,6 @@ stty -ixon
 
 # added by travis gem
 [ -f /home/dave/.travis/travis.sh ] && source /home/dave/.travis/travis.sh
+
+# display work tasks
+t ls @work
