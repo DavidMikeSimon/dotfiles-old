@@ -15,7 +15,7 @@ set hidden       " Hide buffers when they are abandoned
 set mouse=a      " Enable mouse usage (all modes)
 set ruler        " Always show current position
 set autoindent   " Automatically copy indent to new lines
-set hlsearch     " Highlight search results
+set nohlsearch     " Highlight search results
 set shiftround   " Don't allow uneven indentation
 
 " Comment settings:
@@ -122,9 +122,6 @@ au BufReadPost * DetectIndent
 let g:SuperTabLongestEnhanced=1
 let g:SuperTabCrMapping=0
 
-" Clear incsearch highlighting with <C-S>
-nnoremap <silent> <C-S> :nohlsearch<CR>
-
 " Plugin settings: Gundo
 nnoremap <leader>u :GundoToggle<CR>
 
@@ -133,8 +130,14 @@ nmap <space> zz
 
 " Plugin settings: Easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
-nmap s <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-s2)
+map / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map n <Plug>(easymotion-next)
+map N <Plug>(easymotion-prev)
 let g:EasyMotion_smartcase = 1
+let g:EasyMotion_keys = 'aoeidtnpyfgcrlqjkxbmuhs' " Dvorak keys
+let g:EasyMotion_landing_highlight = 1
 
 " Very magic regex mode by default
 " nnoremap / /\v
