@@ -81,10 +81,12 @@ export PATH=$PATH:~/bin-utils:$PATH:~/bin
 # Composer-installed executables
 export PATH=$PATH:~/.composer/vendor/bin
 
-# I hate nano!
 export VISUAL=vim
+export EDITOR=vim
 
 export TODOTXT_DEFAULT_ACTION=ls
+
+export CHROME_BIN=/usr/bin/chromium-browser
 
 # Common commands
 alias u="cd.."
