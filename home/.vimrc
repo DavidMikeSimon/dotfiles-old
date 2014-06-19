@@ -150,3 +150,6 @@ augroup END
 source ~/.vim/plugin/watchforchanges.vim
 let autoreadargs={'autoread':1}
 execute WatchForChanges('*',autoreadargs)
+
+" Open results window after grepping
+autocmd QuickFixCmdPost *grep* cwindow
