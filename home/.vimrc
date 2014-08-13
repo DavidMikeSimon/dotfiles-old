@@ -51,7 +51,9 @@ set path=,,**
 map Q <Nop>
 
 " 80 columns
-set cc=80
+set cc=100
+
+" Indicate noisily when vim has to do a soft break to show an entire line
 set showbreak=+++++
 
 " Scroll through long lines one visual line at a time
@@ -100,7 +102,6 @@ let g:ctrlp_user_command = {
     \ },
   \ 'fallback': 'find %s -type f'
   \ }
-
 let g:ctrlp_root_markers = [
   \ 'composer.phar',
   \ 'package.json',
@@ -108,6 +109,7 @@ let g:ctrlp_root_markers = [
   \ 'Rakefile',
   \ 'CMakeLists.txt'
   \ ]
+let g:ctrlp_switch_buffer='t'
 
 " Default indentation is 2 spaces
 set ts=2 sts=2 sw=2 expandtab
@@ -124,6 +126,7 @@ let g:SuperTabCrMapping=0
 
 " Plugin settings: Gundo
 nnoremap <leader>u :GundoToggle<CR>
+let g:gundo_preview_bottom=1
 
 " Center screen with space bar
 nmap <space> zz
@@ -153,3 +156,7 @@ execute WatchForChanges('*',autoreadargs)
 
 " Open results window after grepping
 autocmd QuickFixCmdPost *grep* cwindow
+
+" vim-easy-align mappings
+vmap <Enter> <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
