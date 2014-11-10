@@ -160,3 +160,6 @@ autocmd QuickFixCmdPost *grep* cwindow
 " vim-easy-align mappings
 vmap <Enter> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
+
+" additional files to ignore in ctrlp, even if they aren't in gitignore
+set wildignore+=*.lock,npm-shrinkwrap.json
