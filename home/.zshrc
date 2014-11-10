@@ -106,3 +106,6 @@ stty -ixon
 
 # display work tasks
 t ls @work
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
