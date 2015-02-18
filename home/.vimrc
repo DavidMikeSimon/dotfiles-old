@@ -182,13 +182,3 @@ nmap <Leader>a <Plug>(EasyAlign)
 
 " additional files to ignore in ctrlp, even if they aren't in gitignore
 set wildignore+=*.lock,npm-shrinkwrap.json
-
-" EasyMotion
-let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_keys = 'lrcgpdhtnsaoeui'
-nmap f <Plug>(easymotion-s)
-nmap <space> <Plug>(easymotion-bd-jk)
-map <Leader><space> <Plug>(easymotion-bd-jk)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)

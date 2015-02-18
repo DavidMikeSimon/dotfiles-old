@@ -104,8 +104,5 @@ stty -ixon
 # added by travis gem
 [ -f /home/dave/.travis/travis.sh ] && source /home/dave/.travis/travis.sh
 
-# display work tasks
-t ls @work
-
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
