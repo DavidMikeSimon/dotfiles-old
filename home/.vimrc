@@ -50,7 +50,7 @@ set path=,,**
 " Nobody likes Ex mode
 map Q <Nop>
 
-" 80 columns
+" 100 columns
 set cc=100
 
 " Indicate noisily when vim has to do a soft break to show an entire line
@@ -182,3 +182,6 @@ nmap <Leader>a <Plug>(EasyAlign)
 
 " additional files to ignore in ctrlp, even if they aren't in gitignore
 set wildignore+=*.lock,npm-shrinkwrap.json
+
+" some filetype configs enable folding, i hate folding
+set nofoldenable

@@ -81,6 +81,9 @@ export PATH=$PATH:~/bin-utils:$PATH:~/bin
 # Composer-installed executables
 export PATH=$PATH:~/.composer/vendor/bin
 
+# Cabal-install executables
+export PATH=$PATH:~/.cabal/bin
+
 export VISUAL=vim
 export EDITOR=vim
 
