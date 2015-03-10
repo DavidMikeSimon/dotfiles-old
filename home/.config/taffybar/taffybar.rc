@@ -1,24 +1,20 @@
-gtk_color_scheme = "black:#000000\nwhite:#FFFFFF\ngreen:#00FF00\nred:#FF0000"
-
 style "default" {
-  bg[NORMAL]   = @black
-  fg[NORMAL]   = @white
-  text[NORMAL] = @white
-  fg[PRELIGHT] = @green
-  bg[PRELIGHT] = @black
+  bg[NORMAL]   = "#303030"
+  fg[NORMAL]   = "#FFFFFF"
+  text[NORMAL] = "#FFFFFF"
 }
 
 style "active-window" = "default" {
-  fg[NORMAL] = @green
+  fg[NORMAL] = "#00FF00"
 }
 
 style "notification-button" = "default" {
-  text[NORMAL] = @red
-  fg[NORMAL]   = @red
+  text[NORMAL] = "#FF0000"
+  fg[NORMAL]   = "#FF0000"
 }
 
 widget "Taffybar*" style "default"
 widget "Taffybar*WindowSwitcher*label" style "active-window"
 widget "*NotificationCloseButton" style "notification-button"
 
-gtk-font-name="Sans 8"
+gtk-font-name="Ubuntu 9"
