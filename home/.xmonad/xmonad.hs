@@ -3,6 +3,7 @@
 import qualified Data.List as L
 import Data.Maybe(fromMaybe)
 import Data.Monoid
+import Control.Monad
 import System.IO
 import System.Taffybar.Hooks.PagerHints
 import qualified System.Posix.Env as Env
@@ -15,6 +16,8 @@ import XMonad.Actions.FloatSnap
 import XMonad.Actions.UpdatePointer
 import qualified XMonad.Actions.FlexibleResize as Flex
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.Place
 import XMonad.Hooks.EwmhDesktops(ewmh)
 import XMonad.Prompt.Shell
 import XMonad.Util.EZConfig(additionalKeys, removeKeys)
@@ -40,14 +43,18 @@ main = do
   smartRespawn "dropbox" "QT_STYLE_OVERRIDE=gtk dropbox start"
 
   xmonad $ ewmh $ pagerHints $ defaultConfig {
+    -- TODO: Disable mouse follows focus, instead have all keyboard focus commands move mouse directly
+    -- That way the mouse isn't being messed with when focused window disappears
     terminal = "/home/dave/bin-utils/urxvtb",
     modMask = mod4Mask,
     borderWidth = 0,
     workspaces = myWorkspaces,
-    manageHook = manageDocks <+> manageHook defaultConfig,
+    manageHook =  myManageHook <+> manageHook defaultConfig,
     layoutHook = avoidStruts $ layoutHook defaultConfig,
     logHook = updatePointer (0.5, 0.5) (0.5, 0.5)
   } `removeKeys` badKeys `additionalKeys` myKeys
+
+myFloatPlacement = inBounds (underMouse (0,0))
 
 myWorkspaces = [
     "1:web",
@@ -60,6 +67,14 @@ myWorkspaces = [
     "8:misc",
     "9:bg"
   ]
+
+myManageHook = placeHook myFloatPlacement <+> manageDocks <+> composeAll  [
+     isDialog --> doFloat,
+     (stringProperty "WM_WINDOW_ROLE") =? "bubble" --> doFloat,
+     anyPropLike "Gimp" --> doShiftAndGo "6:gimp"
+  ]
+  where doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
+        anyPropLike = \s -> (className =? s <||> title =? s <||> resource =? s)
 
 myKeys =
   [
@@ -119,26 +134,3 @@ stubbornView i s
 smartRespawn :: MonadIO m => String -> String -> m ()
 smartRespawn procName command = io $ do
   unsafeSpawn ("killall " ++ procName ++ "; " ++ command)
-
-{-myLogHook = do-}
-  {-takeTopFocus-}
-  {-fadeInactiveLogHook 0.85-}
-  {--- FIXME Bail out if this wasn't a focus change event-}
-  {--- movePanel -}
-  {--- updatePointer (Relative 0.5 0.5)-}
-
-{-startup = do-}
-  {-setWMName "LG3D"-}
-
- {-main-}
-    {-xmonad -}
-        {-{ manageHook = fullscreenManageHook <+> manageDocks <+> myManageHook-}
-                       {-<+> manageHook defaultConfig-}
-        {-, handleEventHook = fullscreenEventHook-}
-        {-, layoutHook = myLayout-}
-        {-, logHook = myLogHook >> dynamicLogWithPP (prettyPrinter dbus)-}
-        {-, modMask = mod4Mask-}
-        {-, borderWidth = 0-}
-        {-, startupHook = startup-}
-        {-, focusFollowsMouse = False-}
-        {-} `removeKeys` badKeys `additionalKeys` myKeys-}
