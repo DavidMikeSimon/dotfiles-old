@@ -1,8 +1,10 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 
 import qualified Data.List as L
+import Data.Char
 import Data.Maybe(fromMaybe)
 import Data.Monoid
+import qualified Data.Map as M
 import Control.Monad
 import System.IO
 import System.Taffybar.Hooks.PagerHints
@@ -20,10 +22,17 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.Place
 import XMonad.Hooks.EwmhDesktops(ewmh)
 import XMonad.Prompt.Shell
-import XMonad.Util.EZConfig(additionalKeys, removeKeys)
+import XMonad.Util.EZConfig
 import XMonad.Util.Run(spawnPipe, unsafeSpawn)
 import XMonad.Util.WorkspaceCompare
 import XMonad.Actions.CycleWS
+import XMonad.Layout.ShowWName
+import XMonad.Layout.PerWorkspace
+import XMonad.Layout.Named
+import XMonad.Layout.ComboP
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.TwoPane
+import XMonad.Layout.Tabbed
 import qualified XMonad.StackSet as W
 import XMonad.Actions.SpawnOn
 import XMonad.Prompt
@@ -50,9 +59,10 @@ main = do
     borderWidth = 0,
     workspaces = myWorkspaces,
     manageHook =  myManageHook <+> manageHook defaultConfig,
-    layoutHook = avoidStruts $ layoutHook defaultConfig,
-    logHook = updatePointer (0.5, 0.5) (0.5, 0.5)
-  } `removeKeys` badKeys `additionalKeys` myKeys
+    layoutHook = showWName $ avoidStruts $ myLayout,
+    logHook = updatePointer (0.5, 0.5) (0.5, 0.5),
+    mouseBindings = myMouseBindings
+  } `removeKeysP` badKeys `additionalKeysP` myKeys
 
 myFloatPlacement = inBounds (underMouse (0,0))
 
@@ -68,38 +78,53 @@ myWorkspaces = [
     "9:bg"
   ]
 
+myLayout = onWorkspace "6:gimp" gimpLayout $ standardLayouts
+  where gimpLayout = named "Gimp" (combineTwoP (TwoPane 0.04 0.9) (simpleTabbed) (simpleTabbedBottom) (Not (Role "gimp-toolbox")))
+        tiled = ResizableTall 1 0.05 0.65 []
+        standardLayouts = (named "Horizontal" tiled) ||| (named "Vertical" (Mirror tiled)) ||| (Full)
+
 myManageHook = placeHook myFloatPlacement <+> manageDocks <+> composeAll  [
      isDialog --> doFloat,
-     (stringProperty "WM_WINDOW_ROLE") =? "bubble" --> doFloat,
-     anyPropLike "Gimp" --> doShiftAndGo "6:gimp"
+     role =? "bubble" --> doFloat,
+     anyPropLike "chromium" --> keepMaster (role =? "browser"),
+     anyPropLike "Gimp" --> doShift "6:gimp"
   ]
-  where doShiftAndGo = doF . liftM2 (.) W.greedyView W.shift
-        anyPropLike = \s -> (className =? s <||> title =? s <||> resource =? s)
+  where anyPropLike = \s -> ((propLike className s) <||> (propLike title s) <||> (propLike resource s))
+        propLike = \q s -> fmap (\r -> L.isInfixOf (map toLower s) (map toLower r)) q
+        role = stringProperty "WM_WINDOW_ROLE"
 
 myKeys =
   [
-    ((mod4Mask, xK_f), do { nextScreen; windows $ withOtherWorkspace W.greedyView }), -- swap screens
-    ((mod4Mask, xK_Return), promote),
-    ((mod4Mask, xK_r), shellPromptHere defaultXPConfig),
-    ((mod4Mask, xK_g), spawn "x-www-browser"),
-    ((mod4Mask, xK_apostrophe), screenWorkspace 0 >>= flip whenJust (windows . W.view)),
-    ((mod4Mask, xK_period),     screenWorkspace 1 >>= flip whenJust (windows . W.view)),
-    ((shiftMask .|. mod4Mask, xK_apostrophe), screenWorkspace 0 >>= flip whenJust (windows . W.shift)),
-    ((shiftMask .|. mod4Mask, xK_period),     screenWorkspace 1 >>= flip whenJust (windows . W.shift))
+    ("M-f", do { nextScreen; windows $ withOtherWorkspace W.greedyView }), -- swap screens
+    ("M-<Return>", promote),
+    ("M-r", shellPromptHere defaultXPConfig),
+    ("M-g", spawn "x-www-browser"),
+    ("M-'", screenWorkspace 0 >>= flip whenJust (windows . W.view)),
+    ("M-.", screenWorkspace 1 >>= flip whenJust (windows . W.view)),
+    ("M-S-'", screenWorkspace 0 >>= flip whenJust (windows . W.shift)),
+    ("M-S-.", screenWorkspace 1 >>= flip whenJust (windows . W.shift)),
+    ("M-S-h", sendMessage MirrorShrink),
+    ("M-S-l", sendMessage MirrorExpand)
   ]
   ++
-  [((mod4Mask, key), windows $ stubbornView i) | (i, key) <- zip myWorkspaces [xK_1 .. xK_9]]
+  [("M " ++ (show key), windows $ stubbornView i) | (i, key) <- zip myWorkspaces [1 .. 9]]
   ++
-  [((shiftMask .|. mod4Mask, key), windows $ W.shift i) | (i, key) <- zip myWorkspaces [xK_1 .. xK_9]]
+  [("M-S " ++ (show key), windows $ W.shift i) | (i, key) <- zip myWorkspaces [xK_1 .. xK_9]]
+  where withOtherWorkspace f ws = f (otherWorkspace ws) ws
+        otherWorkspace = W.tag . W.workspace . head . W.visible
+
 
 badKeys = [
-    (mod4Mask, xK_comma),
-    (mod4Mask, xK_period),
-    (mod4Mask, xK_Return),
-    (mod4Mask, xK_p)
+    "M-p",
+    "M-w",
+    "M-e",
+    "M-S-w",
+    "M-S-e",
+    "M-S-r",
+    "M-m"
   ]
 
-myMouseBindings = [
+myMouseBindings (XConfig {modMask = modMask}) = M.fromList [
     ((modMask, button1), \w -> focus w >> mouseMoveWindow w >> snapMagicMove (Just 50) (Just 50) w),
     ((modMask, button3), \w -> focus w >> Flex.mouseResizeWindow w >> snapMagicMouseResize 0.5 (Just 50) (Just 50) w)
   ]
@@ -113,10 +138,6 @@ comptonCmd = L.intercalate " " [
    "--backend glx",
    "--no-fading-openclose"
  ]
-
-withOtherWorkspace f ws = f (otherWorkspace ws) ws
-  where
-    otherWorkspace = W.tag . W.workspace . head . W.visible
 
 -- Just like W.view but never switches screens
 stubbornView :: (Eq s, Eq i) => i -> W.StackSet i l a s sd -> W.StackSet i l a s sd
@@ -134,3 +155,8 @@ stubbornView i s
 smartRespawn :: MonadIO m => String -> String -> m ()
 smartRespawn procName command = io $ do
   unsafeSpawn ("killall " ++ procName ++ "; " ++ command)
+
+keepMaster :: Query Bool -> ManageHook
+keepMaster m = assertSlave <+> assertMaster
+   where assertSlave = fmap (not) m --> doF W.swapDown
+         assertMaster = m --> doF W.swapMaster

@@ -16,9 +16,10 @@ graphColors = [(0,1,0,1), (1,0,1,0.5)]
 
 iconifyLayout :: String -> String
 iconifyLayout name
-  | name == "Tall" = icon "\9703"
-  | name == "Mirror Tall" = icon "\9636"
+  | name == "Horizontal" = icon "\9703"
+  | name == "Vertical" = icon "\9636"
   | name == "Full" = icon "\9635"
+  | name == "Gimp" = icon "\9999"
   | otherwise = name
   where icon = \s -> "<span size='x-large' rise='8000'>" ++ s ++ "</span>"
 
@@ -30,7 +31,7 @@ main = do
     monitorNumber = 0
   }
   where cpuCfg = defaultGraphConfig { graphDataColors = graphColors, graphLabel = Just "cpu" }
-        clock = textClockNew Nothing (colorize "orange" "" "%a %b %_d %H:%M") 1
+        clock = textClockNew Nothing (colorize "orange" "" "%a %Y-%m-%d %H:%M ") 1
         tray = systrayNew
         cpu = pollingGraphNew cpuCfg 0.5 cpuCallback
         mpris = mprisNew
