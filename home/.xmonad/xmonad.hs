@@ -44,21 +44,22 @@ main = do
   spawn "nvidia-settings -l"
   spawn "xmodmap /home/dave/.xmodmap"
   spawn "nitrogen --restore"
+  spawn "DISPLAY= /home/dave/bin-utils/dropbox.py start" -- start dropbox in headless mode
 
   smartRespawn "compton" "compton --config /home/dave/.xmonad/compton.conf --backend glx"
   smartRespawn "taffybar-linux-x86_64" "taffybar --recompile"
   smartRespawn "parcellite" "parcellite"
   smartRespawn "gnome-sound-applet" "gnome-sound-applet"
-  smartRespawn "dropbox" "QT_STYLE_OVERRIDE=gtk dropbox start"
+  smartRespawn "xautolock" "xautolock -locker 'i3lock -n' -killer 'xset dpms force off' -notify 5 -notifier 'xset s activate'"
 
-  xmonad $ ewmh $ pagerHints $ defaultConfig {
+  xmonad $ ewmh $ pagerHints $ def {
     -- TODO: Disable mouse follows focus, instead have all keyboard focus commands move mouse directly
     -- That way the mouse isn't being messed with when focused window disappears
     terminal = "/home/dave/bin-utils/urxvtb",
     modMask = mod4Mask,
     borderWidth = 0,
     workspaces = myWorkspaces,
-    manageHook =  myManageHook <+> manageHook defaultConfig,
+    manageHook =  myManageHook <+> manageHook def,
     layoutHook = showWName $ avoidStruts $ myLayout,
     logHook = updatePointer (0.5, 0.5) (0.5, 0.5),
     mouseBindings = myMouseBindings
@@ -87,7 +88,9 @@ myManageHook = placeHook myFloatPlacement <+> manageDocks <+> composeAll  [
      isDialog --> doFloat,
      role =? "bubble" --> doFloat,
      anyPropLike "chromium" --> keepMaster (role =? "browser"),
-     anyPropLike "Gimp" --> doShift "6:gimp"
+     anyPropLike "clementine" --> doShift "5:music",
+     anyPropLike "gimp" --> doShift "6:gimp",
+     anyPropLike "libreoffice" --> doShift "7:office"
   ]
   where anyPropLike = \s -> ((propLike className s) <||> (propLike title s) <||> (propLike resource s))
         propLike = \q s -> fmap (\r -> L.isInfixOf (map toLower s) (map toLower r)) q
@@ -97,14 +100,21 @@ myKeys =
   [
     ("M-f", do { nextScreen; windows $ withOtherWorkspace W.greedyView }), -- swap screens
     ("M-<Return>", promote),
-    ("M-r", shellPromptHere defaultXPConfig),
+    ("M-r", shellPromptHere def),
     ("M-g", spawn "x-www-browser"),
     ("M-'", screenWorkspace 0 >>= flip whenJust (windows . W.view)),
     ("M-.", screenWorkspace 1 >>= flip whenJust (windows . W.view)),
     ("M-S-'", screenWorkspace 0 >>= flip whenJust (windows . W.shift)),
     ("M-S-.", screenWorkspace 1 >>= flip whenJust (windows . W.shift)),
     ("M-S-h", sendMessage MirrorShrink),
-    ("M-S-l", sendMessage MirrorExpand)
+    ("M-S-l", sendMessage MirrorExpand),
+    ("<XF86AudioLowerVolume>", spawn "amixer -q set PCM 20-"),
+    ("<XF86AudioRaiseVolume>", spawn "amixer -q set PCM 20+"),
+    ("<XF86AudioPlay>", spawn "mpris-remote pause"),
+    ("<XF86AudioStop>", spawn "mpris-remote stop"),
+    ("<XF86AudioNext>", spawn "mpris-remote next"),
+    ("<XF86AudioPrev>", spawn "mpris-remote prev"),
+    ("<XF86Sleep>", spawn "xautolock -locknow")
   ]
   ++
   [("M " ++ (show key), windows $ stubbornView i) | (i, key) <- zip myWorkspaces [1 .. 9]]

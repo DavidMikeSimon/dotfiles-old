@@ -1,18 +1,28 @@
+import qualified Graphics.UI.Gtk as Gtk
+import qualified System.Process as P
+import qualified Data.List as L
+
 import System.Taffybar
 import System.Taffybar.Systray
 import System.Taffybar.TaffyPager
 import System.Taffybar.Pager
 import System.Taffybar.SimpleClock
+import System.Taffybar.Widgets.PollingLabel
 import System.Taffybar.Widgets.PollingGraph
 import System.Taffybar.MPRIS
 import System.Taffybar.FreedesktopNotifications
-import System.Information.CPU
+import System.Taffybar.CPUMonitor
+import System.Taffybar.DiskIOMonitor
 
-cpuCallback = do
-  (_, systemLoad, totalLoad) <- cpuLoad
-  return [ totalLoad, systemLoad ]
+cpuGraphConf = defaultGraphConfig {
+    graphDataColors = [(0,1,0,1), (1,0,1,0.5)],
+    graphLabel = Just (colorize "green" "" "cpu:")
+  }
 
-graphColors = [(0,1,0,1), (1,0,1,0.5)]
+diskGraphConf = defaultGraphConfig {
+    graphDataColors = [(1,0,0,1), (0,1,1,0.5)],
+    graphLabel = Just (colorize "green" "" "disk:")
+  }
 
 iconifyLayout :: String -> String
 iconifyLayout name
@@ -23,19 +33,39 @@ iconifyLayout name
   | otherwise = name
   where icon = \s -> "<span size='x-large' rise='8000'>" ++ s ++ "</span>"
 
+iconifyDropboxOutput :: String -> String
+iconifyDropboxOutput s
+  | includes "Starting..." = colorize "green" "" $ icon "\8644"
+  | includes "Syncing" = colorize "green" "" $ icon "\8644"
+  | includes "Up to date" = colorize "white" "" $ icon "\10003"
+  | otherwise = colorize "red" "" $ icon "\9785"
+  where icon = \s -> "<span size='x-large' rise='-2000'>" ++ s ++ "</span>"
+        includes t = L.isInfixOf t s
+
+dropboxMonitorNew :: IO Gtk.Widget
+dropboxMonitorNew = do
+  label <- pollingLabelNew "" 2 $ dropboxStatusFetch
+  Gtk.widgetShowAll label
+  return $ Gtk.toWidget label
+  where dropboxCmd = "/home/dave/bin-utils/dropbox.py"
+        dropboxStatusFetch = do
+          (ecode, stdout, stderr) <- P.readProcessWithExitCode dropboxCmd ["status"] ""
+          return $ "dropbox: " ++ iconifyDropboxOutput stdout
+
 main = do
   defaultTaffybar defaultTaffybarConfig {
     startWidgets = [ pager ],
-    endWidgets = [ clock, cpu, mpris, tray, notify ],
+    endWidgets = [ clock, cpu, disk, dropbox, tray, mpris, notify ],
     barHeight = 20,
     monitorNumber = 0
   }
-  where cpuCfg = defaultGraphConfig { graphDataColors = graphColors, graphLabel = Just "cpu" }
-        clock = textClockNew Nothing (colorize "orange" "" "%a %Y-%m-%d %H:%M ") 1
+  where clock = textClockNew Nothing (colorize "orange" "" "%a %Y-%m-%d %H:%M ") 1
         tray = systrayNew
-        cpu = pollingGraphNew cpuCfg 0.5 cpuCallback
+        cpu = cpuMonitorNew cpuGraphConf 0.5 "cpu"
+        disk = dioMonitorNew diskGraphConf 0.5 "sda"
         mpris = mprisNew
         notify = notifyAreaNew defaultNotificationConfig
+        dropbox = dropboxMonitorNew
         pager = taffyPagerNew pagerConfig
         pagerConfig = PagerConfig {
             activeWindow = escape . shorten 100,
