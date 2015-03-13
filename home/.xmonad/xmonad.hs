@@ -109,12 +109,19 @@ myKeys =
     ("M-S-h", sendMessage MirrorShrink),
     ("M-S-l", sendMessage MirrorExpand),
     ("<XF86AudioLowerVolume>", spawn "amixer -q set PCM 20-"),
+    ("M-<F2>",                 spawn "amixer -q set PCM 20-"),
     ("<XF86AudioRaiseVolume>", spawn "amixer -q set PCM 20+"),
+    ("M-<F3>",                 spawn "amixer -q set PCM 20+"),
     ("<XF86AudioPlay>", spawn "mpris-remote pause"),
+    ("M-<F5>",          spawn "mpris-remote pause"),
     ("<XF86AudioStop>", spawn "mpris-remote stop"),
-    ("<XF86AudioNext>", spawn "mpris-remote next"),
+    ("M-<F6>",          spawn "mpris-remote stop"),
     ("<XF86AudioPrev>", spawn "mpris-remote prev"),
-    ("<XF86Sleep>", spawn "xautolock -locknow")
+    ("M-<F7>",          spawn "mpris-remote prev"),
+    ("<XF86AudioNext>", spawn "mpris-remote next"),
+    ("M-<F8>",          spawn "mpris-remote next"),
+    ("<XF86Sleep>", spawn "xautolock -locknow"),
+    ("M-<F12>",     spawn "xautolock -locknow")
   ]
   ++
   [("M " ++ (show key), windows $ stubbornView i) | (i, key) <- zip myWorkspaces [1 .. 9]]
