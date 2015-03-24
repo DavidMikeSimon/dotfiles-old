@@ -44,6 +44,7 @@ main = do
   spawn "nvidia-settings -l"
   spawn "xmodmap /home/dave/.xmodmap"
   spawn "nitrogen --restore"
+  spawn "ssh-add"
   spawn "DISPLAY= /home/dave/bin-utils/dropbox.py start" -- start dropbox in headless mode
 
   smartRespawn "compton" "compton --config /home/dave/.xmonad/compton.conf --backend glx"
@@ -124,9 +125,9 @@ myKeys =
     ("M-<F12>",     spawn "xautolock -locknow")
   ]
   ++
-  [("M " ++ (show key), windows $ stubbornView i) | (i, key) <- zip myWorkspaces [1 .. 9]]
+  [("M-" ++ (show key), windows $ stubbornView i) | (i, key) <- zip myWorkspaces [1 .. 9]]
   ++
-  [("M-S " ++ (show key), windows $ W.shift i) | (i, key) <- zip myWorkspaces [xK_1 .. xK_9]]
+  [("M-S-" ++ (show key), windows $ W.shift i) | (i, key) <- zip myWorkspaces [xK_1 .. xK_9]]
   where withOtherWorkspace f ws = f (otherWorkspace ws) ws
         otherWorkspace = W.tag . W.workspace . head . W.visible
 
