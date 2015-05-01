@@ -98,14 +98,13 @@ alias ifmud="tt++ ~/.ifmud.ttcfg"
 alias smplayer="mplayer -framedrop -subfont-autoscale 1 -sid 0 -fs -af volume=10,pan=1:0.5:0.5"
 alias minecraft="java -Xmx1024M -Xms512M -cp Downloads/Minecraft.jar net.minecraft.LauncherFrame"
 alias cdhs="cd `homesick show_path`"
-alias t="bash /home/dave/bin-utils/todo.txt_cli/todo.sh"
 alias g=git
 
 # Disable the XOFF/XON freeze when you hit Ctrl+S
 stty -ixon
 
 # added by travis gem
-[ -f /home/dave/.travis/travis.sh ] && source /home/dave/.travis/travis.sh
+[ -f /home/dsimon/.travis/travis.sh ] && source /home/dsimon/.travis/travis.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

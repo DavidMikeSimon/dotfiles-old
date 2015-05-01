@@ -18,6 +18,9 @@ set autoindent   " Automatically copy indent to new lines
 set nohlsearch     " Highlight search results
 set shiftround   " Don't allow uneven indentation
 
+" trust that the terminal supports 256 colors
+set t_Co=256
+
 " Comment settings:
 " c - auto-wrap comments
 " g - format coments with gq
@@ -60,6 +63,10 @@ set showbreak=+++++
 map j gj
 map k gk
 
+map U <C-u>
+map D <C-d>
+map M :join<CR>
+
 " Searches wrap around the file
 set wrapscan
 
@@ -90,10 +97,6 @@ let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 colorscheme solarized
 
-" Plugin settings: Tagbar
-let g:tagbar_usearrows = 1
-nnoremap <leader>t :TagbarToggle<CR>
-
 " Plugin settings: CtrlP
 let g:ctrlp_user_command = {
   \ 'types': {
@@ -106,10 +109,12 @@ let g:ctrlp_root_markers = [
   \ 'composer.phar',
   \ 'package.json',
   \ 'components.json',
+  \ 'bower.json',
   \ 'Rakefile',
   \ 'CMakeLists.txt'
   \ ]
 let g:ctrlp_switch_buffer='t'
+map ; :CtrlP<CR>
 
 " Using matcher with CtrlP: https://github.com/burke/matcher#using-with-ctrlpvim
 let g:path_to_matcher = "~/bin-utils/matcher"
@@ -142,13 +147,13 @@ set scrolloff=10
 " Plugin settings: DetectIndent
 au BufReadPost * DetectIndent
 
-" Plugin settings: Supertab
-let g:SuperTabLongestEnhanced=1
-let g:SuperTabCrMapping=0
-
 " Plugin settings: Gundo
 nnoremap <leader>u :GundoToggle<CR>
 let g:gundo_preview_bottom=1
+
+" Open new split panes to the right and bottom
+set splitbelow
+set splitright
 
 " Very magic regex mode by default
 " nnoremap / /\v
@@ -176,12 +181,66 @@ execute WatchForChanges('*',autoreadargs)
 " Open results window after grepping
 autocmd QuickFixCmdPost *grep* cwindow
 
+" Resize internal window scale when console resized
+autocmd VimResized * :wincmd =
+
 " vim-easy-align mappings
 vmap <Enter> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
+
+" syntastic settings
+let g:syntastic_less_use_less_lint = 1
 
 " additional files to ignore in ctrlp, even if they aren't in gitignore
 set wildignore+=*.lock,npm-shrinkwrap.json
 
 " some filetype configs enable folding, i hate folding
 set nofoldenable
+
+" easymotion
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_keys = 'idaoeuqjkxmwvpyfgccrlhtns'
+nmap f <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-s)
+map / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map ? <Plug>(easymotion-sn)
+omap ? <Plug>(easymotion-tn)
+map n <Plug>(easymotion-next)
+map N <Plug>(easymotion-prev)
+map H <Plug>(easymotion-linebackward)
+map J <Plug>(easymotion-j)
+map K <Plug>(easymotion-k)
+map L <Plug>(easymotion-lineforward)
+
+" airline
+set laststatus=2
+let g:airline_theme="base16"
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+" unicode symbols
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" git gutter
+let g:gitgutter_override_sign_column_highlight=0
+highlight SignColumn ctermbg=black
+
+" neocomplete
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_auto_select = 0
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplete#close_popup() . "\<CR>"
+endfunction
+call neocomplete#custom#source('buffer', 'rank', 5000)

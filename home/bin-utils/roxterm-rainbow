@@ -1,0 +1,17 @@
+#!/bin/bash
+
+n=1
+
+if [ -e "/home/dsimon/.roxterm-rainbow" ]
+then
+	n=`cat ~/.roxterm-rainbow`
+	n=$((n+1))
+fi
+
+if [ $n -gt 9 ]
+then
+	n=1
+fi
+
+echo $n > /home/dsimon/.roxterm-rainbow
+roxterm --color-scheme=solarized-dark-$n --disable-sm --separate

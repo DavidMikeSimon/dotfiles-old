@@ -47,7 +47,7 @@ dropboxMonitorNew = do
   label <- pollingLabelNew "" 2 $ dropboxStatusFetch
   Gtk.widgetShowAll label
   return $ Gtk.toWidget label
-  where dropboxCmd = "/home/dave/bin-utils/dropbox.py"
+  where dropboxCmd = "/home/dsimon/bin-utils/dropbox.py"
         dropboxStatusFetch = do
           (ecode, stdout, stderr) <- P.readProcessWithExitCode dropboxCmd ["status"] ""
           return $ "dropbox: " ++ iconifyDropboxOutput stdout
@@ -55,7 +55,8 @@ dropboxMonitorNew = do
 main = do
   defaultTaffybar defaultTaffybarConfig {
     startWidgets = [ pager ],
-    endWidgets = [ clock, cpu, disk, dropbox, tray, mpris, notify ],
+    --endWidgets = [ clock, cpu, disk, dropbox, tray, mpris, notify ],
+    endWidgets = [ clock, cpu, disk, dropbox, tray, notify ],
     barHeight = 20,
     monitorNumber = 0
   }

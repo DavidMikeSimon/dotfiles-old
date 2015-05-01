@@ -3,10 +3,11 @@
 !-------------------------------------------------------------------------------
  
 Xft.dpi:                    72
-Xft.antialias:              false
-Xft.rgba:                   rgb
+Xft.antialias:              true
+Xft.rgba:                   none
 Xft.hinting:                true
-Xft.hintstyle:              hintslight
+Xft.autohint:               true
+Xft.hintstyle:              hintsfull
  
 ! -------------------------------------------------------------------------------
 ! URxvt settings
@@ -21,7 +22,7 @@ URxvt.geometry:             90x30
 URxvt.transparent:          false
 URxvt.fading:               0
 URxvt.urgentOnBell:         true
-#URxvt.visualBell:           true
+!URxvt.visualBell:           true
 URxvt.loginShell:           true
 URxvt.saveLines:            32767
 URxvt.internalBorder:       3
@@ -33,6 +34,7 @@ URxvt.allow_bold:           false
 ! URxvt.font: xft:Menlo for Powerline:pixelsize=10
 ! URxvt.font: xft:Source Code Pro for Powerline:pixelsize=10
 ! URxvt.font: xft:ProggySquareTT
+!URxvt.font: xft:Anonymous Pro:pixelsize=11
  
 ! Fix font space
 !URxvt*letterSpace: -4
