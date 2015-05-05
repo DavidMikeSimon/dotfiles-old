@@ -64,6 +64,7 @@ main = do
     manageHook =  myManageHook <+> manageHook def,
     layoutHook = showWName $ avoidStruts $ myLayout,
     logHook = updatePointer (0.5, 0.5) (0.5, 0.5),
+    handleEventHook = myHandleEventHook,
     mouseBindings = myMouseBindings
   } `removeKeysP` badKeys `additionalKeysP` myKeys
 
@@ -151,6 +152,8 @@ myMouseBindings (XConfig {modMask = modMask}) = M.fromList [
     ((modMask, button1), \w -> focus w >> mouseMoveWindow w >> snapMagicMove (Just 50) (Just 50) w),
     ((modMask, button3), \w -> focus w >> Flex.mouseResizeWindow w >> snapMagicMouseResize 0.5 (Just 50) (Just 50) w)
   ]
+
+myHandleEventHook = docksEventHook
 
 comptonCmd = L.intercalate " " [
    "compton",

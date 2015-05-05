@@ -55,8 +55,7 @@ dropboxMonitorNew = do
 main = do
   defaultTaffybar defaultTaffybarConfig {
     startWidgets = [ pager ],
-    --endWidgets = [ clock, cpu, disk, dropbox, tray, mpris, notify ],
-    endWidgets = [ clock, cpu, disk, dropbox, tray, notify ],
+    endWidgets = [ clock, cpu, disk, dropbox, tray, mpris, notify ],
     barHeight = 20,
     monitorNumber = 0
   }
@@ -64,7 +63,7 @@ main = do
         tray = systrayNew
         cpu = cpuMonitorNew cpuGraphConf 0.5 "cpu"
         disk = dioMonitorNew diskGraphConf 0.5 "sda"
-        mpris = mprisNew
+        mpris = mprisNew defaultMPRISConfig
         notify = notifyAreaNew defaultNotificationConfig
         dropbox = dropboxMonitorNew
         pager = taffyPagerNew pagerConfig
