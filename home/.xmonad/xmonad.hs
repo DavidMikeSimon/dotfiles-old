@@ -42,7 +42,6 @@ main = do
   Just path <- Env.getEnv "PATH"
   Env.setEnv "PATH" (path ++ ":/home/dsimon/.cabal/bin") True
 
-  spawn "nvidia-settings -l"
   spawn "xmodmap /home/dsimon/.xmodmap"
   spawn "nitrogen --restore"
   spawn "ssh-add"
@@ -61,12 +60,13 @@ main = do
     modMask = mod4Mask,
     borderWidth = 0,
     workspaces = myWorkspaces,
-    manageHook =  myManageHook <+> manageHook def,
-    layoutHook = showWName $ avoidStruts $ myLayout,
+    manageHook = myManageHook <+> manageHook def,
+    layoutHook = showWName $ myLayout,{-showWName $ avoidStruts $ myLayout,-}
     logHook = updatePointer (0.5, 0.5) (0.5, 0.5),
     handleEventHook = myHandleEventHook,
     mouseBindings = myMouseBindings
   } `removeKeysP` badKeys `additionalKeysP` myKeys
+
 
 myFloatPlacement = inBounds (underMouse (0,0))
 
