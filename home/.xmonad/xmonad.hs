@@ -17,6 +17,7 @@ import XMonad.Actions.Promote
 import XMonad.Actions.WindowGo
 import XMonad.Actions.FloatSnap
 import XMonad.Actions.UpdatePointer
+import XMonad.Actions.PhysicalScreens
 import qualified XMonad.Actions.FlexibleResize as Flex
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -34,6 +35,7 @@ import XMonad.Layout.ComboP
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.TwoPane
 import XMonad.Layout.Tabbed
+import XMonad.Layout.Gaps
 import qualified XMonad.StackSet as W
 import XMonad.Actions.SpawnOn
 import XMonad.Prompt
@@ -61,7 +63,7 @@ main = do
     borderWidth = 0,
     workspaces = myWorkspaces,
     manageHook = myManageHook <+> manageHook def,
-    layoutHook = showWName $ myLayout,{-showWName $ avoidStruts $ myLayout,-}
+    layoutHook = avoidStruts $ showWName $ myLayout,
     logHook = updatePointer (0.5, 0.5) (0.5, 0.5),
     handleEventHook = myHandleEventHook,
     mouseBindings = myMouseBindings
@@ -82,7 +84,7 @@ myWorkspaces = [
     "9:bg"
   ]
 
-myLayout = onWorkspace "6:gimp" gimpLayout $ standardLayouts
+myLayout = {-gaps [(U,20)] $-} onWorkspace "6:gimp" gimpLayout $ standardLayouts
   where gimpLayout = named "Gimp" (combineTwoP (TwoPane 0.04 0.9) (simpleTabbed) (simpleTabbedBottom) (Not (Role "gimp-toolbox")))
         tiled = ResizableTall 1 0.05 0.75 []
         standardLayouts = (named "Horizontal" tiled) ||| (named "Vertical" (Mirror tiled)) ||| (Full)
@@ -91,6 +93,7 @@ myManageHook = placeHook myFloatPlacement <+> manageDocks <+> composeAll  [
      isDialog --> doFloat,
      role =? "bubble" --> doFloat,
      anyPropLike "chromium" --> keepMaster (role =? "browser"),
+     anyPropLike "Google-chrome" --> keepMaster (role =? "browser"),
      anyPropLike "roxterm" --> keepMaster (anyPropLike "VIM"),
      anyPropLike "clementine" --> doShift "5:music",
      anyPropLike "gimp" --> doShift "6:gimp",
@@ -102,16 +105,15 @@ myManageHook = placeHook myFloatPlacement <+> manageDocks <+> composeAll  [
 
 myKeys =
   [
-    ("M-f", do { nextScreen; windows $ withOtherWorkspace W.greedyView }), -- swap screens
     ("M-<Return>", promote),
     ("M-r", shellPromptHere def),
     ("M-g", spawn "x-www-browser"),
-    ("M-'", screenWorkspace 0 >>= flip whenJust (windows . W.view)),
-    ("M-,", screenWorkspace 1 >>= flip whenJust (windows . W.view)),
-    ("M-.", screenWorkspace 2 >>= flip whenJust (windows . W.view)),
-    ("M-S-'", screenWorkspace 0 >>= flip whenJust (windows . W.shift)),
-    ("M-S-,", screenWorkspace 1 >>= flip whenJust (windows . W.shift)),
-    ("M-S-.", screenWorkspace 2 >>= flip whenJust (windows . W.shift)),
+    ("M-'", viewScreen 0),
+    ("M-,", viewScreen 1),
+    ("M-.", viewScreen 2),
+    ("M-S-'", swapScreen 0),
+    ("M-S-,", swapScreen 1),
+    ("M-S-.", swapScreen 2),
     ("M-S-h", sendMessage MirrorShrink),
     ("M-S-l", sendMessage MirrorExpand),
     ("<XF86AudioLowerVolume>", spawn "amixer -q set PCM 20-"),
@@ -133,7 +135,8 @@ myKeys =
   [("M-" ++ (show key), windows $ stubbornView i) | (i, key) <- zip myWorkspaces [1 .. 9]]
   ++
   [("M-S-" ++ (show key), windows $ W.shift i) | (i, key) <- zip myWorkspaces [xK_1 .. xK_9]]
-  where withOtherWorkspace f ws = f (otherWorkspace ws) ws
+  where swapScreen n = do { viewScreen n; windows $ withOtherWorkspace W.greedyView }
+        withOtherWorkspace f ws = f (otherWorkspace ws) ws
         otherWorkspace = W.tag . W.workspace . head . W.visible
 
 

@@ -24,7 +24,7 @@ set t_Co=256
 " Comment settings:
 " c - auto-wrap comments
 " g - format coments with gq
-au BufReadPost * set formatoptions=cq
+au BufReadPost * set formatoptions=croq textwidth=100
 
 " Spell checking and no indentation magic in markdown files
 au BufReadPost *.md,*.markdown set spell
@@ -65,7 +65,6 @@ map k gk
 
 map U <C-u>
 map D <C-d>
-map M :join<CR>
 
 " Searches wrap around the file
 set wrapscan
@@ -73,6 +72,10 @@ set wrapscan
 " Shortcuts to work with the X clipboard
 map <leader>xc :w !xsel -i<CR>
 map <leader>xp :r!xsel<CR>
+
+" Show current line number surrounded by relative numbers
+set number
+set relativenumber
 
 " Let backspace key in Insert mode delete anything
 set backspace=indent,eol,start
@@ -197,23 +200,6 @@ set wildignore+=*.lock,npm-shrinkwrap.json
 " some filetype configs enable folding, i hate folding
 set nofoldenable
 
-" easymotion
-let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_keys = 'idaoeuqjkxmwvpyfgccrlhtns'
-nmap f <Plug>(easymotion-s)
-nmap s <Plug>(easymotion-s)
-map / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-map ? <Plug>(easymotion-sn)
-omap ? <Plug>(easymotion-tn)
-map n <Plug>(easymotion-next)
-map N <Plug>(easymotion-prev)
-map H <Plug>(easymotion-linebackward)
-map J <Plug>(easymotion-j)
-map K <Plug>(easymotion-k)
-map L <Plug>(easymotion-lineforward)
-
 " airline
 set laststatus=2
 let g:airline_theme="base16"
@@ -227,6 +213,8 @@ let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
+let g:airline#extensions#default#layout = [ ['a','b','c'], ['x','z','warning' ] ]
+let g:airline#extensions#branch#displayed_head_limit = 12
 
 " git gutter
 let g:gitgutter_override_sign_column_highlight=0
@@ -244,3 +232,9 @@ function! s:my_cr_function()
   return neocomplete#close_popup() . "\<CR>"
 endfunction
 call neocomplete#custom#source('buffer', 'rank', 5000)
+
+" vim-g (google search)
+let g:vim_g_query_url="https://www.google.com/search?btnI&q="
+let g:vim_g_command = "Go"
+let g:vim_g_f_command = "Gf"
+nmap <Enter> :Gf<CR>
