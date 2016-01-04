@@ -37,37 +37,37 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # plugins=(bower command-not-found cp git git-extras npm pip symfony2)
-plugins=(command-not-found cp vi-mode history-substring-search)
+plugins=(command-not-found cp history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
 # Vi-mode with color-changing cursor, from https://bbs.archlinux.org/viewtopic.php?id=95078
-zle-keymap-select () {
-    if [ $TERM = "rxvt" ]; then
-        if [ $KEYMAP = vicmd ]; then
-            echo -ne "\033]12;Red\007"
-        else
-            echo -ne "\033]12;Grey\007"
-        fi
-    fi
-}
-zle -N zle-keymap-select
-zle-line-init () {
-    zle -K viins
-    if [ $TERM = "rxvt" ]; then
-        echo -ne "\033]12;Grey\007"
-    fi
-}
-zle -N zle-line-init
+#zle-keymap-select () {
+    #if [ $TERM = "rxvt" ]; then
+        #if [ $KEYMAP = vicmd ]; then
+            #echo -ne "\033]12;Red\007"
+        #else
+            #echo -ne "\033]12;Grey\007"
+        #fi
+    #fi
+#}
+#zle -N zle-keymap-select
+#zle-line-init () {
+    #zle -K viins
+    #if [ $TERM = "rxvt" ]; then
+        #echo -ne "\033]12;Grey\007"
+    #fi
+#}
+#zle -N zle-line-init
 
 # Additional vi mode bindings, from http://zshwiki.org/home/zle/vi-mode
-bindkey -a 'gg' beginning-of-buffer-or-history
-bindkey -a 'g~' vi-oper-swap-case
-bindkey -a G end-of-buffer-or-history
-bindkey -a u undo
-bindkey -a '^R' redo
-bindkey '^?' backward-delete-char
-bindkey '^H' backward-delete-char
+#bindkey -a 'gg' beginning-of-buffer-or-history
+#bindkey -a 'g~' vi-oper-swap-case
+#bindkey -a G end-of-buffer-or-history
+#bindkey -a u undo
+#bindkey -a '^R' redo
+#bindkey '^?' backward-delete-char
+#bindkey '^H' backward-delete-char
 
 # Allow use of globs that return no results
 #setopt nullglob

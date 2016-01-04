@@ -8,4 +8,4 @@ export GOOGLE_API_KEY=AIzaSyAhBWdTSFMmQ7zj8zgrGK9ADNJY_-HCvEk
 export GOOGLE_DEFAULT_CLIENT_ID=844137694578-urai82snj5fr4371k1lis4j6uihlpt6o.apps.googleusercontent.com
 export GOOGLE_DEFAULT_CLIENT_SECRET=Xge8PExFRsAIcRZ0CXkcwz0s
 
-ssh-agent dbus-launch --exit-with-session i3
+ssh-agent dbus-launch --exit-with-session /home/dsimon/i3/i3
