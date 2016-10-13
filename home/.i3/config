@@ -23,7 +23,7 @@ exec xsetroot -cursor_name left_ptr
 exec xautolock -locker 'i3lock -n' -killer 'xset dpms force off' -notify 5 -notifier 'xset s activate'
 exec /opt/extras.ubuntu.com/pushbullet-indicator/bin/pushbullet-indicator
 
-exec google-chrome
+exec google-chrome-stable
 exec clementine
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -65,12 +65,14 @@ set $wk10 "10: misc"
 
 set $sc1 DVI-I-1
 set $sc2 DVI-D-0
-set $sc3 HDMI-0
+#set $sc3 HDMI-0
 
 workspace $wk1 output $sc1
-workspace $wk2 output $sc2
-workspace $wk3 output $sc3
-workspace $wk5 output $sc3
+workspace $wk2 output $sc1
+workspace $wk3 output $sc2
+#workspace $wk2 output $sc2
+#workspace $wk3 output $sc3
+#workspace $wk5 output $sc3
 
 assign [class="^Google-chrome$"] $wk3
 assign [class="^Clementine$"] $wk5
@@ -101,13 +103,15 @@ bindsym $mod+Shift+0 move container to workspace $wk10
 
 # switch to screen
 bindsym $mod+apostrophe focus output $sc1
-bindsym $mod+comma focus output $sc2
-bindsym $mod+period focus output $sc3
+bindsym $mod+period focus output $sc2
+#bindsym $mod+comma focus output $sc2
+#bindsym $mod+period focus output $sc3
 
 # move workspace to screen
 bindsym $mod+Shift+apostrophe move workspace to output $sc1
-bindsym $mod+Shift+comma move workspace to output $sc2
-bindsym $mod+Shift+period move workspace to output $sc3
+bindsym $mod+Shift+period move workspace to output $sc2
+#bindsym $mod+Shift+comma move workspace to output $sc2
+#bindsym $mod+Shift+period move workspace to output $sc3
 
 # start a terminal
 bindsym $mod+Return exec /home/dsimon/bin-utils/roxterm-rainbow
@@ -174,10 +178,18 @@ bindsym XF86AudioLowerVolume exec "amixer -q set Master 5- ; killall -USR1 i3sta
 bindsym $mod+F2 exec "amixer -q set Master 5- ; killall -USR1 i3status"
 bindsym XF86AudioRaiseVolume exec "amixer -q set Master 5+ ; killall -USR1 i3status"
 bindsym $mod+F3 exec "amixer -q set Master 5+ ; killall -USR1 i3status"
+bindsym XF86AudioPlay exec "mpris-remote pause"
+bindsym $mod+F5 exec "mpris-remote pause"
+bindsym XF86AudioStop exec "mpris-remote stop"
+bindsym $mod+F6 exec "mpris-remote stop"
+bindsym XF86AudioPrev exec "mpris-remote prev"
+bindsym $mod+F7 exec "mpris-remote prev"
+bindsym XF86AudioNext exec "mpris-remote next"
+bindsym $mod+F8 exec "mpris-remote next"
 
 # lock
 bindsym XF86Sleep exec xautolock -locknow
-bindsym $m+F12 exec xautolock -locknow
+bindsym $mod+F12 exec xautolock -locknow
 
 # reload the configuration file
 bindsym $mod+Shift+r reload

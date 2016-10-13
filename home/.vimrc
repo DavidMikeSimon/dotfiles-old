@@ -238,3 +238,7 @@ let g:vim_g_query_url="https://www.google.com/search?btnI&q="
 let g:vim_g_command = "Go"
 let g:vim_g_f_command = "Gf"
 nmap <Enter> :Gf<CR>
+
+" write directly to file, instead of atomic move. necessary for brunch/chokidar file watcher :-(
+set nobackup
+set nowritebackup

@@ -92,7 +92,8 @@ export TODOTXT_DEFAULT_ACTION=ls
 export CHROME_BIN=/usr/bin/chromium-browser
 
 # Common commands
-alias u="cd.."
+alias cd..="cd .."
+alias u="cd .."
 alias megavim="vim +vsplit +vsplit"
 alias ifmud="tt++ ~/.ifmud.ttcfg"
 alias smplayer="mplayer -framedrop -subfont-autoscale 1 -sid 0 -fs -af volume=10,pan=1:0.5:0.5"

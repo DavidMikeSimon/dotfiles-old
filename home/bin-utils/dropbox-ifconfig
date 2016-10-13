@@ -1,0 +1,4 @@
+#!/bin/bash
+
+HOSTNAME=`hostname`
+/sbin/ifconfig eth0 | grep inet > /home/dsimon/Dropbox/Dave/$HOSTNAME-ifconfig
