@@ -1,0 +1,91 @@
+[submodule "]auto_mkdir"]
+    path = home/.vim/bundle/auto_mkdir
+    url = https://github.com/DataWraith/auto_mkdir.git
+
+[submodule "]ctrlp.vim"]
+    path = home/.vim/bundle/ctrlp.vim
+    url = git@github.com:kien/ctrlp.vim.git
+
+[submodule "]detectindent"]
+    path = home/.vim/bundle/detectindent
+    url = git@github.com:ciaranm/detectindent.git
+
+[submodule "]editorconfig-vim"]
+    path = home/.vim/bundle/editorconfig-vim
+    url = git@github.com:editorconfig/editorconfig-vim.git
+
+[submodule "]gist-vim"]
+    path = home/.vim/bundle/gist-vim
+    url = git@github.com:mattn/gist-vim.git
+
+[submodule "]gundo.vim"]
+    path = home/.vim/bundle/gundo.vim
+    url = http://github.com/sjl/gundo.vim.git
+
+[submodule "]nerdcommenter"]
+    path = home/.vim/bundle/nerdcommenter
+    url = git@github.com:scrooloose/nerdcommenter.git
+
+[submodule "]SmartCase"]
+    path = home/.vim/bundle/SmartCase
+    url = https://github.com/vim-scripts/SmartCase
+
+[submodule "]syntastic"]
+    path = home/.vim/bundle/syntastic
+    url = git@github.com:scrooloose/syntastic.git
+
+[submodule "]vim-abolish"]
+    path = home/.vim/bundle/vim-abolish
+    url = https://github.com/tpope/vim-abolish
+
+[submodule "]vim-airline"]
+    path = home/.vim/bundle/vim-airline
+    url = git@github.com:bling/vim-airline.git
+
+[submodule "]vim-coffee-script"]
+    path = home/.vim/bundle/vim-coffee-script
+    url = https://github.com/kchmck/vim-coffee-script.git
+
+[submodule "]vim-colors-solarized"]
+    path = home/.vim/bundle/vim-colors-solarized
+    url = git@github.com:altercation/vim-colors-solarized.git
+
+[submodule "]vim-easy-align"]
+    path = home/.vim/bundle/vim-easy-align
+    url = https://github.com/junegunn/vim-easy-align.git
+
+[submodule "]vim-eunuch"]
+    path = home/.vim/bundle/vim-eunuch
+    url = https://github.com/tpope/vim-eunuch
+
+[submodule "]vim-fugitive"]
+    path = home/.vim/bundle/vim-fugitive
+    url = git@github.com:tpope/vim-fugitive.git
+
+[submodule "]vim-g"]
+    path = home/.vim/bundle/vim-g
+    url = git@github.com:szw/vim-g.git
+
+[submodule "]vim-gitgutter"]
+    path = home/.vim/bundle/vim-gitgutter
+    url = https://github.com/airblade/vim-gitgutter
+
+[submodule "]vim-jade"]
+    path = home/.vim/bundle/vim-jade
+    url = git://github.com/digitaltoad/vim-jade.git
+
+[submodule "]Vim-Jinja2-Syntax"]
+    path = home/.vim/bundle/Vim-Jinja2-Syntax
+    url = https://github.com/Glench/Vim-Jinja2-Syntax.git
+
+[submodule "]vim-less"]
+    path = home/.vim/bundle/vim-less
+    url = https://github.com/groenewege/vim-less.git
+
+[submodule "]vim-markdown"]
+    path = home/.vim/bundle/vim-markdown
+    url = https://github.com/gabrielelana/vim-markdown.git
+
+[submodule "]vim-repeat"]
+    path = home/.vim/bundle/vim-repeat
+    url = https://github.com/tpope/vim-repeat.git
