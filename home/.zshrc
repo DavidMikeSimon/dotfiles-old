@@ -91,6 +91,11 @@ export TODOTXT_DEFAULT_ACTION=ls
 
 export CHROME_BIN=/usr/bin/chromium-browser
 
+if [ ! -z "$STY" ]; then
+    PS1="
+%{$fg[green]%}<screen:${WINDOW}>%{$reset_color%}$PS1"
+fi
+
 # Common commands
 alias cd..="cd .."
 alias u="cd .."

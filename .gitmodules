@@ -90,6 +90,6 @@
     path = home/.vim/bundle/vim-repeat
     url = https://github.com/tpope/vim-repeat.git
 
-[submodules "oh-my-zsh"]
+[submodule "oh-my-zsh"]
     path = home/.oh-my-zsh
-    url = https://github.com/robbyrussell/oh-my-zsh.git (push)
+    url = https://github.com/robbyrussell/oh-my-zsh.git
